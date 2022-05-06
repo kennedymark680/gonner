@@ -1,58 +1,68 @@
 import './style/App.css'
 import { useState, useEffect } from 'react'
+import { Route, Routes } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import Movie from './pages/Movie'
+import Home from './pages/Home'
 
 function App() {
+  const apiUrl = 'http://localhost:3001'
+  const [allMovies, setAllMovies] = useState([])
+  const [movieDetails, setMovieDetails] = useState({})
   const [movieForm, setMovieForm] = useState({
     name: '',
     description: '',
     image: ''
   })
 
-  const handleChange = (e) => {
+  const handleMovieChange = (e) => {
     setMovieForm({ ...movieForm, [e.target.name]: e.target.value })
     console.log(movieForm)
   }
 
-  const handleSubmit = async (e) => {
+  const handleMovieSubmit = async (e) => {
     e.preventDefault()
-    const response = await axios.post(
-      `http://localhost:3001/api/movie/create`,
-      movieForm
-    )
+    const response = await axios.post(`${apiUrl}/api/movie/create`, movieForm)
     console.log(response.data)
+  }
+
+  const getMovieDetails = async (movieId) => {
+    const res = await axios.get(`${apiUrl}/api/movie/${movieId}`)
+    setMovieDetails(res.data)
+    console.log(res.data)
+  }
+
+  const getAllMovies = async () => {
+    const res = await axios.get(`${apiUrl}/api/movie`)
+    setAllMovies(res.data)
+    console.log(allMovies)
   }
 
   return (
     <div className="App">
-      <form className="create-movie" onSubmit={handleSubmit}>
-        <div>
-          <input
-            name="name"
-            type="text"
-            placeholder="Movie Title"
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <input
-            name="description"
-            type="text"
-            placeholder="Short Description"
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <input
-            name="image"
-            type="text"
-            placeholder="Movie Poster"
-            onChange={handleChange}
-          />
-        </div>
-        <button>Submit</button>
-      </form>
+      <Routes>
+        <Route
+          path="/movie/:movieId"
+          element={
+            <Movie
+              getMovieDetails={getMovieDetails}
+              movieDetails={movieDetails}
+            />
+          }
+        />
+        <Route
+          path="/"
+          element={
+            <Home
+              getAllMovies={getAllMovies}
+              allMovies={allMovies}
+              handleMovieSubmit={handleMovieSubmit}
+              handleMovieChange={handleMovieChange}
+            />
+          }
+        />
+      </Routes>
     </div>
   )
 }
