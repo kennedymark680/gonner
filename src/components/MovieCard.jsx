@@ -7,7 +7,7 @@ const MovieCard = (props) => {
         <div className="movie-card-text">
           <h1>{props.name}</h1>
           <div>{props.description}</div>
-          <button>Play!</button>
+          <button onClick={() => props.playMovie(props.id)}>Play!</button>
         </div>
       </div>
   )

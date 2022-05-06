@@ -1,17 +1,10 @@
 import { useEffect } from 'react'
 import MovieCard from '../components/MovieCard'
-import { useNavigate } from 'react-router-dom'
 
 const Home = (props) => {
-  let navigate = useNavigate()
-
   useEffect(() => {
     props.getAllMovies()
   }, [])
-
-  const playMovie = (movieId) => {
-    navigate(`/movie/${movieId}`)
-  }
 
   return (
     <div>
@@ -45,9 +38,12 @@ const Home = (props) => {
       <div className="movie-list">
         {props.allMovies.map((movie) => (
           <MovieCard
+            key={movie.id}
+            id={movie.id}
             name={movie.name}
             description={movie.description}
             image={movie.image}
+            playMovie={props.playMovie}
           />
         ))}
       </div>

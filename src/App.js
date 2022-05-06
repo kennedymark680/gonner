@@ -7,6 +7,8 @@ import Movie from './pages/Movie'
 import Home from './pages/Home'
 
 function App() {
+  let navigate = useNavigate()
+
   const apiUrl = 'http://localhost:3001'
   const [allMovies, setAllMovies] = useState([])
   const [movieDetails, setMovieDetails] = useState({})
@@ -30,13 +32,17 @@ function App() {
   const getMovieDetails = async (movieId) => {
     const res = await axios.get(`${apiUrl}/api/movie/${movieId}`)
     setMovieDetails(res.data)
-    console.log(res.data)
+    console.log(movieDetails)
   }
 
   const getAllMovies = async () => {
     const res = await axios.get(`${apiUrl}/api/movie`)
     setAllMovies(res.data)
     console.log(allMovies)
+  }
+
+  const playMovie = (movieId) => {
+    navigate(`/movie/${movieId}`)
   }
 
   return (
@@ -59,6 +65,7 @@ function App() {
               allMovies={allMovies}
               handleMovieSubmit={handleMovieSubmit}
               handleMovieChange={handleMovieChange}
+              playMovie={playMovie}
             />
           }
         />
