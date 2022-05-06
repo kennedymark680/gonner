@@ -22,6 +22,18 @@ const Movie = (props) => {
             <h1>{props.movieDetails.name}</h1>
             <p>{props.movieDetails.description}</p>
           </div>
+          <div className="cast-section">
+            <h3>Cast</h3>
+            <div>
+              <input
+                name="name"
+                type="text"
+                placeholder="Cast Member"
+                onChange={props.handleCastChange}
+              />
+            </div>
+            <button onClick={() => props.handleCastSubmit(movieId)}>Add</button>
+          </div>
         </div>
       ) : (
         <div>Loading...</div>
