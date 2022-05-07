@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import GuessList from '../components/GuessList'
 
 const Movie = (props) => {
   const { movieId } = useParams()
@@ -85,6 +86,9 @@ const Movie = (props) => {
             </div>
             <button onClick={() => handleCastSubmit(movieId)}>Add</button>
             <button onClick={() => console.log()}>Increase</button>
+          </div>
+          <div>
+            <GuessList movieCast={props.movieCast} />
           </div>
         </div>
       ) : (
