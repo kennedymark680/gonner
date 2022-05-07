@@ -15,16 +15,17 @@ function App() {
 
   const [allMovies, setAllMovies] = useState([])
   const [movieDetails, setMovieDetails] = useState({})
+  const [movieCast, setMovieCast] = useState([])
   const [castForm, setCastForm] = useState({
     name: '',
     alive: true,
-    order: null,
-    movieId: null
+    order: 0
   })
   const [movieForm, setMovieForm] = useState({
     name: '',
     description: '',
-    image: ''
+    image: '',
+    gonnerOrder: 1
   })
 
   // ------ HANDLE CHANGES --------
@@ -36,7 +37,6 @@ function App() {
 
   const handleCastChange = (e) => {
     setCastForm({ ...castForm, [e.target.name]: e.target.value })
-    console.log(castForm)
   }
 
   // ------- HANDLE SUBMITs ---------
@@ -47,21 +47,11 @@ function App() {
     console.log(res.data)
   }
 
-  const handleCastSubmit = async (e, movieId) => {
-    console.log(castForm, 'handle submit')
-    const res = await axios.post(
-      `${apiUrl}/api/castmember/${movieId}`,
-      castForm
-    )
-    console.log(res.data)
-  }
-
   // -------- GET REQUESTS ----------
 
   const getMovieDetails = async (movieId) => {
     const res = await axios.get(`${apiUrl}/api/movie/${movieId}`)
     setMovieDetails(res.data)
-    console.log(movieDetails)
   }
 
   const getAllMovies = async () => {
@@ -70,11 +60,35 @@ function App() {
     console.log(allMovies)
   }
 
+  const getCastByMovieId = async (movieId) => {
+    const res = await axios.get(`${apiUrl}/api/castmember/${movieId}`)
+    setMovieCast(res.data)
+  }
+
+  // ---------- DELETES ------------
+
+  const deleteCastMember = async (castmemberId, movieId) => {
+    const res = await axios.delete(`${apiUrl}/api/castmember/${castmemberId}`)
+    getCastByMovieId(movieId)
+    getMovieDetails(movieId)
+
+    let newOrder = movieDetails.gonnerOrder - 1
+    console.log(movieDetails.gonnerOrder, 'gonnerOrder')
+    console.log(newOrder, 'newOrder')
+    const resMovie = await axios.put(`${apiUrl}/api/movie/${movieId}`, {
+      gonnerOrder: newOrder
+    })
+    getMovieDetails(movieId)
+    console.log(movieDetails, 'after delete and update')
+  }
+
   // --------- NAVIGATE ---------------
 
   const playMovie = (movieId) => {
     navigate(`/movie/${movieId}`)
   }
+
+  // --------- OTHER FUNCTIONS -------
 
   return (
     <div className="App">
@@ -86,7 +100,13 @@ function App() {
               getMovieDetails={getMovieDetails}
               movieDetails={movieDetails}
               handleCastChange={handleCastChange}
-              handleCastSubmit={handleCastSubmit}
+              getCastByMovieId={getCastByMovieId}
+              deleteCastMember={deleteCastMember}
+              movieCast={movieCast}
+              castForm={castForm}
+              setCastForm={setCastForm}
+              // gonnerOrder={gonnerOrder}
+              // increaseGonnerCount={increaseGonnerCount}
             />
           }
         />
