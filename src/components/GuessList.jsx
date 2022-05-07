@@ -16,18 +16,19 @@ const GuessList = (props) => {
   const handleCharacterCreate = async () => {
     // const res = await axios.post(`${apiUrl}/api/`)
     console.log(character)
+    setCharacter('')
   }
 
   return (
     <div className="guessList">
       <div>Guess List</div>
-      <input list='characters' name='characterSelection' onChange={handleCharacterChange} onSubmit={handleCharacterCreate}/>
+      <input list='characters' name='characterSelection' onChange={handleCharacterChange} value={character}/>
       <datalist id='characters'>
         {props.movieCast.map((char) => (
           <option value={char.name} key={char.id}/>
         ))}
       </datalist>
-      <button>Create</button>
+      <button onClick={handleCharacterCreate}>Create</button>
     </div>
   )
 }
