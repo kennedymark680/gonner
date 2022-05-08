@@ -1,7 +1,9 @@
-const Character = () => {
+const Character = (props) => {
   return (
-    <div>
-      <div></div>
+    <div className="character">
+      <div>{props.name}</div>
+      <div>{props.order}</div>
+      <button onClick={() => props.handleGonner(props.id)}>Gonner</button>
     </div>
   )
 }

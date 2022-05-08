@@ -14,9 +14,14 @@ const GuessList = (props) => {
   }
 
   const handleCharacterCreate = async () => {
-    // const res = await axios.post(`${apiUrl}/api/`)
+    const res = await axios.post(`${apiUrl}/api/character/`)
     console.log(character)
     setCharacter('')
+  }
+
+  const handleGonner = async (charId) => {
+    console.log(charId)
+    // const resCharacter = await axios.put(`${apiUrl}/api/character${charId}`)
   }
 
   return (
@@ -29,6 +34,11 @@ const GuessList = (props) => {
         ))}
       </datalist>
       <button onClick={handleCharacterCreate}>Create</button>
+      <div className="characterList">
+        {props.movieCast.map((char) => (
+          <Character key={char.id} name={char.name} id={char.id} gonnerOrder={char.order} handleGonner={handleGonner}/>
+        ))}
+      </div>
     </div>
   )
 }

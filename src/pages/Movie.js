@@ -1,11 +1,23 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import GuessList from '../components/GuessList'
 
 const Movie = (props) => {
+  // -------- VARIABLES --------------
+
   const { movieId } = useParams()
   const apiUrl = 'http://localhost:3001'
+
+  // ----------- STATE -----------------
+
+  const [allGuessLists, setAllGuessLists] = useState([])
+  const [guessListName, setGuessListName] = useState({
+    name: '',
+    gonnerOrder: 1
+  })
+
+  // ----------- AXIOS CALLS -------------
 
   const handleCastSubmit = async () => {
     const res = await axios.post(
@@ -43,9 +55,33 @@ const Movie = (props) => {
     props.getCastByMovieId(movieId)
   }
 
+  // ----- GUESS LIST -----
+  const handleGuessListChange = (e) => {
+    setGuessListName({ [e.target.name]: e.target.value })
+    console.log(guessListName)
+  }
+
+  const handleGuessListSubmit = async (e) => {
+    e.preventDefault()
+    console.log(guessListName)
+    const res = await axios.post(
+      `${apiUrl}/api/guesslist/${movieId}`,
+      guessListName
+    )
+    console.log(res.data)
+    getAllGuessLists()
+  }
+
+  const getAllGuessLists = async () => {
+    const res = await axios.get(`${apiUrl}/api/guesslist/${movieId}`)
+    console.log(res.data)
+    setAllGuessLists(res.data)
+  }
+
   useEffect(() => {
     props.getMovieDetails(movieId)
     props.getCastByMovieId(movieId)
+    getAllGuessLists()
   }, [])
 
   return (
@@ -87,8 +123,19 @@ const Movie = (props) => {
             <button onClick={() => handleCastSubmit(movieId)}>Add</button>
             <button onClick={() => console.log()}>Increase</button>
           </div>
+          <div className="createList">
+            <h2>Create New List</h2>
+            <input name="name" onChange={handleGuessListChange} />
+            <button onClick={handleGuessListSubmit}>Create List</button>
+          </div>
           <div>
-            <GuessList movieCast={props.movieCast} />
+            {allGuessLists.map((list) => (
+              <GuessList
+                key={list.id}
+                movieCast={props.movieCast}
+                gonnerOrder={list.gonnerOrder}
+              />
+            ))}
           </div>
         </div>
       ) : (
