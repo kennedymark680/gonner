@@ -14,6 +14,7 @@ const Movie = (props) => {
   const [allGuessLists, setAllGuessLists] = useState([])
   const [guessListName, setGuessListName] = useState({
     name: '',
+    score: 0,
     gonnerOrder: 1
   })
 
@@ -57,18 +58,29 @@ const Movie = (props) => {
 
   // ----- GUESS LIST -----
   const handleGuessListChange = (e) => {
-    setGuessListName({ [e.target.name]: e.target.value })
-    console.log(guessListName)
+    setGuessListName({ ...guessListName, [e.target.name]: e.target.value })
   }
 
   const handleGuessListSubmit = async (e) => {
     e.preventDefault()
-    console.log(guessListName)
+    // creating the GUESS LIST
+    console.log(guessListName, 'gonnerOrder')
     const res = await axios.post(
       `${apiUrl}/api/guesslist/${movieId}`,
       guessListName
     )
-    console.log(res.data, 'list submit')
+    console.log(res.data.id, 'list submit')
+
+    // creating each CHARACTER for the list
+    for (let i = 0; i < props.movieCast.length; i++) {
+      console.log(props.movieCast[i].name)
+      let character = {
+        name: props.movieCast[i].name,
+        order: 0,
+        alive: true
+      }
+      createCharacters(res.data.id, character)
+    }
     getAllGuessLists()
   }
 
@@ -78,14 +90,12 @@ const Movie = (props) => {
     setAllGuessLists(res.data)
   }
 
-  const createCharacters = async () => {
-    const res = await axios.get(`${apiUrl}/api/guesslist/${movieId}`)
-    let last = res.data.slice(-1)
-    console.log(last[0].id, 'last?')
-    console.log(res.data[res.data], 'testing')
-    // movieCast.foreach((actor) => {
-    //   let res = await axios.post(`${apiUrl}/api/character/${''}`)
-    // })
+  const createCharacters = async (guesslistId, character) => {
+    let charRes = await axios.post(
+      `${apiUrl}/api/character/${guesslistId}`,
+      character
+    )
+    console.log(charRes, 'each actor created')
   }
 
   useEffect(() => {
@@ -146,6 +156,7 @@ const Movie = (props) => {
                 movieCast={props.movieCast}
                 gonnerOrder={list.gonnerOrder}
                 id={list.id}
+                name={list.name}
               />
             ))}
           </div>

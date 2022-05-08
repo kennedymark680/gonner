@@ -28,17 +28,20 @@ const GuessList = (props) => {
 
   return (
     <div className="guessList">
-      <div>Guess List</div>
+      {/* <div>Guess List</div>
       <input list='characters' name='characterSelection' onChange={handleCharacterChange} value={character}/>
       <datalist id='characters'>
         {props.movieCast.map((char) => (
           <option value={char.name} key={char.id}/>
         ))}
-      </datalist>
+      </datalist> */}
       <button onClick={handleCharacterCreate}>Create</button>
       <div className="characterList">
+        <h3>{props.name}</h3>
         {props.movieCast.map((char) => (
-          <Character key={char.id} name={char.name} id={char.id} gonnerOrder={char.order} handleGonner={handleGonner}/>
+          <div>
+            <Character key={char.id} name={char.name} id={char.id} gonnerOrder={char.order} handleGonner={handleGonner}/>
+          </div>
         ))}
       </div>
     </div>
