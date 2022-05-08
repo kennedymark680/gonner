@@ -68,7 +68,7 @@ const Movie = (props) => {
       `${apiUrl}/api/guesslist/${movieId}`,
       guessListName
     )
-    console.log(res.data)
+    console.log(res.data, 'list submit')
     getAllGuessLists()
   }
 
@@ -76,6 +76,16 @@ const Movie = (props) => {
     const res = await axios.get(`${apiUrl}/api/guesslist/${movieId}`)
     console.log(res.data)
     setAllGuessLists(res.data)
+  }
+
+  const createCharacters = async () => {
+    const res = await axios.get(`${apiUrl}/api/guesslist/${movieId}`)
+    let last = res.data.slice(-1)
+    console.log(last[0].id, 'last?')
+    console.log(res.data[res.data], 'testing')
+    // movieCast.foreach((actor) => {
+    //   let res = await axios.post(`${apiUrl}/api/character/${''}`)
+    // })
   }
 
   useEffect(() => {
@@ -128,12 +138,14 @@ const Movie = (props) => {
             <input name="name" onChange={handleGuessListChange} />
             <button onClick={handleGuessListSubmit}>Create List</button>
           </div>
+          <button onClick={createCharacters}></button>
           <div>
             {allGuessLists.map((list) => (
               <GuessList
                 key={list.id}
                 movieCast={props.movieCast}
                 gonnerOrder={list.gonnerOrder}
+                id={list.id}
               />
             ))}
           </div>

@@ -24,6 +24,8 @@ const GuessList = (props) => {
     // const resCharacter = await axios.put(`${apiUrl}/api/character${charId}`)
   }
 
+ 
+
   return (
     <div className="guessList">
       <div>Guess List</div>
