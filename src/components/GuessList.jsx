@@ -1,11 +1,15 @@
 import Character from "./Character"
 import axios from 'axios'
-import { useState }  from 'react'
+import { useState, useEffect }  from 'react'
 
 const GuessList = (props) => {
   const apiUrl = 'http://localhost:3001'
 
+  // might not need this anymore 
   const [character, setCharacter] = useState('')
+
+  const [characters, setCharacters] = useState([])
+
 
 
   const handleCharacterChange = (e) => {
@@ -21,10 +25,20 @@ const GuessList = (props) => {
 
   const handleGonner = async (charId) => {
     console.log(charId)
-    // const resCharacter = await axios.put(`${apiUrl}/api/character${charId}`)
+    const resCharacter = await axios.put(`${apiUrl}/api/character/${charId}`, { order: props.gonnerOrder})
+    console.log(resCharacter)
+    getCharactersByListId()
   }
 
+  const getCharactersByListId = async () => {
+    const characters = await axios.get(`${apiUrl}/api/character/${props.id}`)
+    console.log(characters.data)
+    setCharacters(characters.data)
+  }
  
+  useEffect(() => {
+    getCharactersByListId()
+  }, [])
 
   return (
     <div className="guessList">
@@ -35,12 +49,13 @@ const GuessList = (props) => {
           <option value={char.name} key={char.id}/>
         ))}
       </datalist> */}
+      <button onClick={getCharactersByListId}>get characters</button>
       <button onClick={handleCharacterCreate}>Create</button>
       <div className="characterList">
         <h3>{props.name}</h3>
-        {props.movieCast.map((char) => (
+        {characters.map((char) => (
           <div>
-            <Character key={char.id} name={char.name} id={char.id} gonnerOrder={char.order} handleGonner={handleGonner}/>
+            <Character key={char.id} name={char.name} id={char.id} order={char.order} handleGonner={handleGonner}/>
           </div>
         ))}
       </div>
