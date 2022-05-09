@@ -3,7 +3,7 @@ import Client from './api'
 // Axios call to check token, verify and sign in user
 export const SignInUser = async (data) => {
   try {
-    const res = await Client.post('/auth/login', data)
+    const res = await Client.post('api/auth/login', data)
     localStorage.setItem('token', res.data.token)
     return res.data.user
   } catch (error) {
@@ -14,7 +14,7 @@ export const SignInUser = async (data) => {
 // Axios call to create a new user
 export const RegisterUser = async (data) => {
   try {
-    const res = await Client.post('/auth/register', data)
+    const res = await Client.post('api/auth/register', data)
     return res.data
   } catch (error) {
     throw error
@@ -45,7 +45,7 @@ export const PasswordUpdate = async ({
 // Axios call to verify if user is still signed in and authorized to make certain requests.
 export const CheckSession = async () => {
   try {
-    const res = await Client.get('/auth/session')
+    const res = await Client.get('/api/auth/session')
     return res.data
   } catch (error) {
     throw error

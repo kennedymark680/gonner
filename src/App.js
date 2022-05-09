@@ -6,6 +6,8 @@ import { CheckSession } from './services/Auth'
 import axios from 'axios'
 import Movie from './pages/Movie'
 import Home from './pages/Home'
+import Login from './pages/Login'
+import Register from './pages/Register'
 
 function App() {
   let navigate = useNavigate()
@@ -137,7 +139,17 @@ function App() {
           }
         />
         <Route
-          path="/"
+          path="/login"
+          element={
+            <Login
+              setUser={setUser}
+              toggleAuthenticated={toggleAuthenticated}
+            />
+          }
+        />
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/home"
           element={
             <Home
               getAllMovies={getAllMovies}
