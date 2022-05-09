@@ -24,15 +24,18 @@ const GuessList = (props) => {
   }
 
   const handleGonner = async (charId) => {
-    console.log(charId)
     const resCharacter = await axios.put(`${apiUrl}/api/character/${charId}`, { order: props.gonnerOrder})
-    console.log(resCharacter)
+    
+    let newGonnerOrder = props.gonnerOrder + 1
+    const resGuessList = await axios.put(`${apiUrl}/api/guesslist/${props.id}`, { gonnerOrder: newGonnerOrder})
+    console.log(resGuessList)
     getCharactersByListId()
   }
 
   const getCharactersByListId = async () => {
     const characters = await axios.get(`${apiUrl}/api/character/${props.id}`)
     console.log(characters.data)
+    props.getAllGuessLists()
     setCharacters(characters.data)
   }
  
@@ -53,6 +56,8 @@ const GuessList = (props) => {
       <button onClick={handleCharacterCreate}>Create</button>
       <div className="characterList">
         <h3>{props.name}</h3>
+        <h3>{props.score}</h3>
+        <button onClick={() => props.checkScore(props.movieCast, characters, props.score, props.id)}>Check Score</button>
         {characters.map((char) => (
           <div>
             <Character key={char.id} name={char.name} id={char.id} order={char.order} handleGonner={handleGonner}/>

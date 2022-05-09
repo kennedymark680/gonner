@@ -98,6 +98,41 @@ const Movie = (props) => {
     console.log(charRes, 'each actor created')
   }
 
+  // ------- CHECKING SCORE ---------
+  const checkScore = async (cast, guessList, score, guessListId) => {
+    let newScore = score
+
+    cast.forEach((char, index) => {
+      index > 0
+        ? console.log(guessList[index - 1].name, 'guessList[index - 1].name')
+        : console.log('whaa')
+      if (char.name === guessList[index].name) {
+        newScore += 3
+      } else if (index < char.length) {
+        char.name === guessList[index + 1].name
+          ? (newScore += 1)
+          : console.log('no joy')
+      } else if (index > 0) {
+        char.name === guessList[index - 1].name
+          ? (newScore += 1)
+          : console.log('no joy')
+      } else {
+        newScore += 0
+      }
+    })
+
+    console.log(newScore, 'newScore')
+
+    const res = await axios.put(
+      `${apiUrl}/api/guesslist/score/${guessListId}`,
+      {
+        score: newScore
+      }
+    )
+    console.log(res.data, 'checkScore')
+    getAllGuessLists()
+  }
+
   useEffect(() => {
     props.getMovieDetails(movieId)
     props.getCastByMovieId(movieId)
@@ -157,6 +192,9 @@ const Movie = (props) => {
                 gonnerOrder={list.gonnerOrder}
                 id={list.id}
                 name={list.name}
+                score={list.score}
+                getAllGuessLists={getAllGuessLists}
+                checkScore={checkScore}
               />
             ))}
           </div>
