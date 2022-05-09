@@ -28,13 +28,11 @@ const GuessList = (props) => {
     
     let newGonnerOrder = props.gonnerOrder + 1
     const resGuessList = await axios.put(`${apiUrl}/api/guesslist/${props.id}`, { gonnerOrder: newGonnerOrder})
-    console.log(resGuessList)
     getCharactersByListId()
   }
 
   const getCharactersByListId = async () => {
     const characters = await axios.get(`${apiUrl}/api/character/${props.id}`)
-    console.log(characters.data)
     props.getAllGuessLists()
     setCharacters(characters.data)
   }

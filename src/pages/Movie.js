@@ -64,16 +64,13 @@ const Movie = (props) => {
   const handleGuessListSubmit = async (e) => {
     e.preventDefault()
     // creating the GUESS LIST
-    console.log(guessListName, 'gonnerOrder')
     const res = await axios.post(
       `${apiUrl}/api/guesslist/${movieId}`,
       guessListName
     )
-    console.log(res.data.id, 'list submit')
 
     // creating each CHARACTER for the list
     for (let i = 0; i < props.movieCast.length; i++) {
-      console.log(props.movieCast[i].name)
       let character = {
         name: props.movieCast[i].name,
         order: 0,
@@ -86,7 +83,6 @@ const Movie = (props) => {
 
   const getAllGuessLists = async () => {
     const res = await axios.get(`${apiUrl}/api/guesslist/${movieId}`)
-    console.log(res.data)
     setAllGuessLists(res.data)
   }
 
@@ -95,33 +91,27 @@ const Movie = (props) => {
       `${apiUrl}/api/character/${guesslistId}`,
       character
     )
-    console.log(charRes, 'each actor created')
   }
 
   // ------- CHECKING SCORE ---------
   const checkScore = async (cast, guessList, score, guessListId) => {
-    let newScore = score
+    // Set the score to zero first
+    let newScore = 0
 
     cast.forEach((char, index) => {
-      index > 0
-        ? console.log(guessList[index - 1].name, 'guessList[index - 1].name')
-        : console.log('whaa')
       if (char.name === guessList[index].name) {
         newScore += 3
-      } else if (index < char.length) {
+      } else if (
+        index < cast.length &&
         char.name === guessList[index + 1].name
-          ? (newScore += 1)
-          : console.log('no joy')
-      } else if (index > 0) {
-        char.name === guessList[index - 1].name
-          ? (newScore += 1)
-          : console.log('no joy')
+      ) {
+        newScore += 1
+      } else if (index > 0 && char.name === guessList[index - 1].name) {
+        newScore += 1
       } else {
         newScore += 0
       }
     })
-
-    console.log(newScore, 'newScore')
 
     const res = await axios.put(
       `${apiUrl}/api/guesslist/score/${guessListId}`,
@@ -129,7 +119,6 @@ const Movie = (props) => {
         score: newScore
       }
     )
-    console.log(res.data, 'checkScore')
     getAllGuessLists()
   }
 
