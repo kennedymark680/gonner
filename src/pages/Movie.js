@@ -94,7 +94,7 @@ const Movie = (props) => {
   }
 
   // ------- CHECKING SCORE ---------
-  const checkScore = async (cast, guessList, score, guessListId) => {
+  const checkScore = async (cast, guessList, guessListId) => {
     // Set the score to zero first
     let newScore = 0
 

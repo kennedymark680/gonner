@@ -55,7 +55,7 @@ const GuessList = (props) => {
       <div className="characterList">
         <h3>{props.name}</h3>
         <h3>{props.score}</h3>
-        <button onClick={() => props.checkScore(props.movieCast, characters, props.score, props.id)}>Check Score</button>
+        <button onClick={() => props.checkScore(props.movieCast, characters, props.id)}>Check Score</button>
         {characters.map((char) => (
           <div>
             <Character key={char.id} name={char.name} id={char.id} order={char.order} handleGonner={handleGonner}/>

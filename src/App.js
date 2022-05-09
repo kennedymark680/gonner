@@ -2,6 +2,7 @@ import './style/App.css'
 import { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import { CheckSession } from './services/Auth'
 import axios from 'axios'
 import Movie from './pages/Movie'
 import Home from './pages/Home'
@@ -13,6 +14,8 @@ function App() {
 
   // ------- STATE LIVE HERE -----------
 
+  const [authenticated, toggleAuthenticated] = useState(false)
+  const [user, setUser] = useState(null)
   const [allMovies, setAllMovies] = useState([])
   const [movieDetails, setMovieDetails] = useState({})
   const [movieCast, setMovieCast] = useState([])
@@ -27,6 +30,20 @@ function App() {
     image: '',
     gonnerOrder: 1
   })
+
+  // ------- AUTH FUNCTIONS --------
+
+  const handleLogout = () => {
+    setUser(null) //Once logged out, the user no longer has pilgrim priviledges
+    toggleAuthenticated(false) // Once logged out, the user is no longer authenticated
+    localStorage.clear()
+  }
+  // Check each time if the user is a pilgrim and authenticated to make certain commands
+  const checkToken = async () => {
+    const user = await CheckSession()
+    setUser(user)
+    toggleAuthenticated(true)
+  }
 
   // ------ HANDLE CHANGES --------
 
@@ -87,6 +104,15 @@ function App() {
   const playMovie = (movieId) => {
     navigate(`/movie/${movieId}`)
   }
+
+  // --------- USE EFFECT ------------
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      checkToken()
+    }
+  }, [])
 
   // --------- OTHER FUNCTIONS -------
 
