@@ -36,6 +36,11 @@ const GuessList = (props) => {
     props.getAllGuessLists()
     setCharacters(characters.data)
   }
+
+  const deleteList = async () => {
+    const list = await axios.delete(`${apiUrl}/api/guesslist/delete/${props.id}`)
+    props.getAllGuessLists()
+  }
  
   useEffect(() => {
     getCharactersByListId()
@@ -61,6 +66,7 @@ const GuessList = (props) => {
             <Character key={char.id} name={char.name} id={char.id} order={char.order} handleGonner={handleGonner}/>
           </div>
         ))}
+        <button onClick={() => deleteList()}>Delete</button>
       </div>
     </div>
   )

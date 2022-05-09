@@ -11,9 +11,10 @@ const Movie = (props) => {
 
   // ----------- STATE -----------------
 
+  const [characterList, setCharacterList] = useState([])
   const [allGuessLists, setAllGuessLists] = useState([])
   const [guessListName, setGuessListName] = useState({
-    name: '',
+    name: `${props.user.username}`,
     score: 0,
     gonnerOrder: 1
   })
@@ -34,26 +35,60 @@ const Movie = (props) => {
   }
 
   const handleDeath = async (castmemberId) => {
-    props.getMovieDetails(movieId)
-    console.log(props.movieDetails.gonnerOrder, 'handle death')
+    // Check if gonnerOrder isn't more than the number of cast members
+    console.log(props.movieDetails.gonnerOrder)
+    if (props.movieDetails.gonnerOrder <= props.movieCast.length) {
+      props.getMovieDetails(movieId)
 
-    const resCastMember = await axios.put(
-      `${apiUrl}/api/castmember/${castmemberId}`,
-      {
-        alive: false,
-        order: props.movieDetails.gonnerOrder
+      // Set Cast Members gonner order
+      const resCastMember = await axios.put(
+        `${apiUrl}/api/castmember/${castmemberId}`,
+        {
+          alive: false,
+          order: props.movieDetails.gonnerOrder
+        }
+      )
+
+      // Increment and set the new movies gonner order
+      const newOrder = props.movieDetails.gonnerOrder + 1
+      const resMovie = await axios.put(`${apiUrl}/api/movie/${movieId}`, {
+        gonnerOrder: newOrder
+      })
+      props.getMovieDetails(movieId)
+      props.getCastByMovieId(movieId)
+
+      // Create the array of gonners
+      let gonnerArray = []
+
+      axios.get(`${apiUrl}/api/castmember/${movieId}`).then((res) => {
+        res.data.forEach((actor) => {
+          if (!actor.alive) {
+            gonnerArray.push(actor)
+            console.log(gonnerArray, 'gonnerArray')
+          }
+        })
+      })
+
+      // console.log(props.movieCast, 'props.movieCast')
+      // props.movieCast.forEach((actor) => {
+      //   if (!actor.alive) {
+      //     gonnerArray.push(actor)
+      //     console.log(gonnerArray, 'gonnerArray')
+      //   }
+      // })
+
+      // Check the score for ever guess list
+      for (let i = 0; i < allGuessLists.length; i++) {
+        const getCharactersByListId = async () => {
+          const characters = await axios.get(
+            `${apiUrl}/api/character/${allGuessLists[i].id}`
+          )
+          setCharacterList(characters.data)
+          checkScore(props.movieCast, characters.data, allGuessLists[i].id)
+        }
+        getCharactersByListId()
       }
-    )
-
-    const newOrder = props.movieDetails.gonnerOrder + 1
-    const resMovie = await axios.put(`${apiUrl}/api/movie/${movieId}`, {
-      gonnerOrder: newOrder
-    })
-    console.log(resMovie.data, 'updated order')
-    props.getMovieDetails(movieId)
-    console.log(props.movieDetails.gonnerOrder, 'call again')
-
-    props.getCastByMovieId(movieId)
+    }
   }
 
   // ----- GUESS LIST -----
@@ -64,6 +99,7 @@ const Movie = (props) => {
   const handleGuessListSubmit = async (e) => {
     e.preventDefault()
     // creating the GUESS LIST
+    console.log(props.user.username)
     const res = await axios.post(
       `${apiUrl}/api/guesslist/${movieId}`,
       guessListName
@@ -99,6 +135,8 @@ const Movie = (props) => {
     let newScore = 0
 
     cast.forEach((char, index) => {
+      // console.log(char.name, 'char.name', index)
+      // console.log(guessList[index].name, 'guessList[index].name', index)
       if (char.name === guessList[index].name) {
         newScore += 3
       } else if (

@@ -44,6 +44,7 @@ function App() {
   const checkToken = async () => {
     const user = await CheckSession()
     setUser(user)
+    console.log(user)
     toggleAuthenticated(true)
   }
 
@@ -80,8 +81,17 @@ function App() {
   }
 
   const getCastByMovieId = async (movieId) => {
-    const res = await axios.get(`${apiUrl}/api/castmember/${movieId}`)
-    setMovieCast(res.data)
+    // setMovieCast([])
+    // const res = await axios.get(`${apiUrl}/api/castmember/${movieId}`)
+    // setMovieCast(res.data)
+    // console.log(movieCast, 'movieCast State')
+    // console.log(res.data, 'res.data getCast')
+    axios
+      .get(`${apiUrl}/api/castmember/${movieId}`)
+      .then((res) => {
+        setMovieCast(res.data)
+      })
+      .then(console.log(movieCast, 'movieCast'))
   }
 
   // ---------- DELETES ------------
@@ -125,6 +135,7 @@ function App() {
           path="/movie/:movieId"
           element={
             <Movie
+              user={user}
               getMovieDetails={getMovieDetails}
               movieDetails={movieDetails}
               handleCastChange={handleCastChange}
