@@ -166,42 +166,44 @@ const Movie = (props) => {
   }, [])
 
   return (
-    <div className="movie-page">
+    <div>
       {props.movieDetails ? (
-        <div className="movie-page-info">
-          <MovieBanner movieDetails={props.movieDetails} />
-          <div className="cast-section">
-            <h2>Cast</h2>
-            {props.movieCast.map((char) => (
-              <Cast
-                key={char.id}
-                char={char}
-                handleDeath={handleDeath}
-                deleteCastMember={props.deleteCastMember}
-                movieId={movieId}
-              />
-            ))}
-            <div>
-              <input
-                name="name"
-                type="text"
-                placeholder="Cast Member"
-                value={props.castForm.name}
-                onChange={props.handleCastChange}
-              />
-              <button
-                className="add-list"
-                onClick={() => handleCastSubmit(movieId)}
-              >
-                Add
-              </button>
+        <div className="movie-page">
+          <div className="movie-page-info">
+            <MovieBanner movieDetails={props.movieDetails} />
+            <div className="cast-section">
+              <h2>Cast</h2>
+              {props.movieCast.map((char) => (
+                <Cast
+                  key={char.id}
+                  char={char}
+                  handleDeath={handleDeath}
+                  deleteCastMember={props.deleteCastMember}
+                  movieId={movieId}
+                />
+              ))}
+              <div>
+                <input
+                  name="name"
+                  type="text"
+                  placeholder="Cast Member"
+                  value={props.castForm.name}
+                  onChange={props.handleCastChange}
+                />
+                <button
+                  className="add-list"
+                  onClick={() => handleCastSubmit(movieId)}
+                >
+                  Add
+                </button>
+              </div>
             </div>
-          </div>
-          <div className="createList">
-            <CreateNewList
-              handleGuessListChange={handleGuessListChange}
-              handleGuessListSubmit={handleGuessListSubmit}
-            />
+            <div className="createList">
+              <CreateNewList
+                handleGuessListChange={handleGuessListChange}
+                handleGuessListSubmit={handleGuessListSubmit}
+              />
+            </div>
           </div>
           <div className="guess-list-section">
             {allGuessLists.map((list) => (
