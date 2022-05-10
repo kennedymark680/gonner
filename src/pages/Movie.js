@@ -5,6 +5,7 @@ import GuessList from '../components/GuessList'
 import Cast from '../components/Cast'
 import CreateNewList from '../components/CreateNewList'
 import MovieBanner from '../components/MovieBanner'
+import Scoreboard from '../components/Scoreboard'
 
 const Movie = (props) => {
   // -------- VARIABLES --------------
@@ -197,6 +198,9 @@ const Movie = (props) => {
                   Add
                 </button>
               </div>
+            </div>
+            <div>
+              <Scoreboard allGuessLists={allGuessLists} />
             </div>
             <div className="createList">
               <CreateNewList

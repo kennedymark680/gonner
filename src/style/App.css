@@ -106,7 +106,8 @@
 }
 
 .cast-section,
-.guessList {
+.guessList,
+.scoreboard {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -126,8 +127,13 @@
   align-items: center;
 }
 
+.scoreboard {
+  padding: 0 0 40px 0;
+}
+
 .cast,
-.character {
+.character,
+.leader {
   display: flex;
   justify-content: space-around;
 
@@ -142,11 +148,18 @@
   box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
 }
 
+.leader {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  text-align: center;
+}
+
 .cast:hover,
 .character:hover,
 .cast-section:hover,
 .guessList:hover,
-.add-list-section:hover{
+.add-list-section:hover,
+.leader:hover {
     cursor: pointer;
     animation: zoom .1s linear forwards;
 }
