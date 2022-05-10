@@ -184,20 +184,8 @@ const Movie = (props) => {
                 deleteCastMember={props.deleteCastMember}
                 movieId={movieId}
               />
-              // <div key={char.id}>
-              //   <h4>
-              //     {char.name}
-              //     <button onClick={() => handleDeath(char.id)}>X</button>
-              //     <button
-              //       onClick={() => props.deleteCastMember(char.id, movieId)}
-              //     >
-              //       Delete
-              //     </button>
-              //     <p>{char.order}</p>
-              //   </h4>
-              // </div>
             ))}
-            <div>
+            <div className="add-list-section">
               <input
                 name="name"
                 type="text"
@@ -205,15 +193,19 @@ const Movie = (props) => {
                 value={props.castForm.name}
                 onChange={props.handleCastChange}
               />
+              <button
+                className="add-list"
+                onClick={() => handleCastSubmit(movieId)}
+              >
+                Add
+              </button>
             </div>
-            <button onClick={() => handleCastSubmit(movieId)}>Add</button>
           </div>
           <div className="createList">
             <h2>Create New List</h2>
             <input name="name" onChange={handleGuessListChange} />
             <button onClick={handleGuessListSubmit}>Create List</button>
           </div>
-          <button onClick={createCharacters}></button>
           <div>
             {allGuessLists.map((list) => (
               <GuessList

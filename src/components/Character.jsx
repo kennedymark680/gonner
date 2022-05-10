@@ -1,9 +1,11 @@
 const Character = (props) => {
   return (
     <div className="character">
-      <div>{props.name}</div>
-      <div>{props.order}</div>
-      <button onClick={() => props.handleGonner(props.id)}>Gonner</button>
+      <h4>{props.order}</h4>
+      <h4>{props.name}</h4>
+      <div className="cast-buttons">
+        <button onClick={() => props.handleGonner(props.id)}>Gonner</button>
+      </div>
     </div>
   )
 }
