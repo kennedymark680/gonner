@@ -72,8 +72,15 @@
   width: 60%;
 }
 
-.movie-banner {
+/* .movie-page-info {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+} */
+
+.movie-banner {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
 
   width: 80vw;
   height: 30vh;
@@ -86,8 +93,16 @@
 }
 
 .movie-page-info_image {
-  height: 100px;
-  width: 200px;
+  height: 200px;
+  width: auto;
+  border-radius: 5px;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+}
+
+.movie-image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cast-section,
@@ -96,14 +111,19 @@
   flex-direction: column;
   align-items: center;
 
-  width: 30vw;
-  max-width: 350px;
+  width: 325px;
   min-height: 30vh;
-  min-width: 225px;
 
   background-color: #006E7F;
   box-shadow: 10px 5px 5px 	#c5c5c5;
   border-radius: 10px;
+}
+
+.guessList {
+  background-color: #c47617;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .cast,
@@ -177,13 +197,15 @@ input:hover  {
   margin: 30px 0
 }
 
-.guessList {
-  background-color: #c47617;
-  width: 30vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.guess-list-section {
+  padding: 2.5em 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 320px);
+  grid-gap: 2.5em;
+  justify-content: center;
 }
+
+
 
 .character {
   display: flex;

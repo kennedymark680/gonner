@@ -203,7 +203,7 @@ const Movie = (props) => {
               handleGuessListSubmit={handleGuessListSubmit}
             />
           </div>
-          <div>
+          <div className="guess-list-section">
             {allGuessLists.map((list) => (
               <GuessList
                 key={list.id}
