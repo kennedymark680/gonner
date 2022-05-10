@@ -7,34 +7,7 @@ const Home = (props) => {
   }, [])
 
   return (
-    <div>
-      <form className="create-movie" onSubmit={props.handleMovieSubmit}>
-        <div>
-          <input
-            name="name"
-            type="text"
-            placeholder="Movie Title"
-            onChange={props.handleMovieChange}
-          />
-        </div>
-        <div>
-          <input
-            name="description"
-            type="text"
-            placeholder="Short Description"
-            onChange={props.handleMovieChange}
-          />
-        </div>
-        <div>
-          <input
-            name="image"
-            type="text"
-            placeholder="Movie Poster"
-            onChange={props.handleMovieChange}
-          />
-        </div>
-        <button>Submit</button>
-      </form>
+    <div className="homePage">
       <div className="movie-list">
         {props.allMovies.map((movie) => (
           <MovieCard
@@ -46,6 +19,35 @@ const Home = (props) => {
             playMovie={props.playMovie}
           />
         ))}
+      </div>
+      <div className="movie-card create">
+        <form className="create-movie" onSubmit={props.handleMovieSubmit}>
+          <div>
+            <input
+              name="name"
+              type="text"
+              placeholder="Movie Title"
+              onChange={props.handleMovieChange}
+            />
+          </div>
+          <div>
+            <input
+              name="description"
+              type="text"
+              placeholder="Short Description"
+              onChange={props.handleMovieChange}
+            />
+          </div>
+          <div>
+            <input
+              name="image"
+              type="text"
+              placeholder="Movie Poster"
+              onChange={props.handleMovieChange}
+            />
+          </div>
+          <button id="create-movie-button">Create Movie</button>
+        </form>
       </div>
     </div>
   )
