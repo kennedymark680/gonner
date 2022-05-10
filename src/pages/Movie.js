@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import GuessList from '../components/GuessList'
+import Cast from '../components/Cast'
 
 const Movie = (props) => {
   // -------- VARIABLES --------------
@@ -176,18 +177,25 @@ const Movie = (props) => {
           <div className="cast-section">
             <h2>Cast</h2>
             {props.movieCast.map((char) => (
-              <div key={char.id}>
-                <h4>
-                  {char.name}
-                  <button onClick={() => handleDeath(char.id)}>X</button>
-                  <button
-                    onClick={() => props.deleteCastMember(char.id, movieId)}
-                  >
-                    Delete
-                  </button>
-                  <p>{char.order}</p>
-                </h4>
-              </div>
+              <Cast
+                key={char.id}
+                char={char}
+                handleDeath={handleDeath}
+                deleteCastMember={props.deleteCastMember}
+                movieId={movieId}
+              />
+              // <div key={char.id}>
+              //   <h4>
+              //     {char.name}
+              //     <button onClick={() => handleDeath(char.id)}>X</button>
+              //     <button
+              //       onClick={() => props.deleteCastMember(char.id, movieId)}
+              //     >
+              //       Delete
+              //     </button>
+              //     <p>{char.order}</p>
+              //   </h4>
+              // </div>
             ))}
             <div>
               <input
