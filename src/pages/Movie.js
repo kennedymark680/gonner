@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import GuessList from '../components/GuessList'
 import Cast from '../components/Cast'
+import CreateNewList from '../components/CreateNewList'
 
 const Movie = (props) => {
   // -------- VARIABLES --------------
@@ -185,7 +186,7 @@ const Movie = (props) => {
                 movieId={movieId}
               />
             ))}
-            <div className="add-list-section">
+            <div>
               <input
                 name="name"
                 type="text"
@@ -202,9 +203,10 @@ const Movie = (props) => {
             </div>
           </div>
           <div className="createList">
-            <h2>Create New List</h2>
-            <input name="name" onChange={handleGuessListChange} />
-            <button onClick={handleGuessListSubmit}>Create List</button>
+            <CreateNewList
+              handleGuessListChange={handleGuessListChange}
+              handleGuessListSubmit={handleGuessListSubmit}
+            />
           </div>
           <div>
             {allGuessLists.map((list) => (

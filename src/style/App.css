@@ -43,6 +43,15 @@
   }
 }
 
+@keyframes zoom2 {
+  0% {
+    transform: scale(1.0);
+  }
+  100% {
+    transform: scale(1.08);
+  }
+}
+
 .create {
   margin-top: 0;
 }
@@ -96,9 +105,23 @@
 }
 
 .cast:hover,
-.character:hover {
+.character:hover,
+.cast-section:hover,
+.guessList:hover,
+.add-list-section:hover{
     cursor: pointer;
     animation: zoom .1s linear forwards;
+}
+
+
+.cast button:hover,
+.cast button:hover,
+.character button:hover,
+.remove-list:hover,
+.add-list:hover,
+input:hover  {
+  cursor: pointer;
+  animation: zoom2 .1s linear forwards;
 }
 
 .cast-buttons {
@@ -114,13 +137,26 @@
   margin: 0 3px
 }
 .add-list-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   margin: 20px 0;
+  width: 30vw;
+  max-width: 350px;
+  min-height: 20vh;
+  min-width: 225px;
+
+  background-color: #F8CB2E;
+  box-shadow: 10px 5px 5px 	#c5c5c5;
+  border-radius: 5px;
 }
 .add-list {
   border: none;
   height: 30px;
   width: 50px;
   border-radius: 5px;
+  margin: 30px 0
 }
 
 .guessList {
