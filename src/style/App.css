@@ -72,6 +72,24 @@
   width: 60%;
 }
 
+.movie-banner {
+  display: flex;
+
+  width: 80vw;
+  height: 30vh;
+
+  background-color: #B22727;
+  box-shadow: 10px 5px 5px 	#c5c5c5;
+  border-radius: 10px;
+
+  margin: 30px 0;
+}
+
+.movie-page-info_image {
+  height: 100px;
+  width: 200px;
+}
+
 .cast-section,
 .guessList {
   display: flex;

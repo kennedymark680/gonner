@@ -4,6 +4,7 @@ import axios from 'axios'
 import GuessList from '../components/GuessList'
 import Cast from '../components/Cast'
 import CreateNewList from '../components/CreateNewList'
+import MovieBanner from '../components/MovieBanner'
 
 const Movie = (props) => {
   // -------- VARIABLES --------------
@@ -168,13 +169,7 @@ const Movie = (props) => {
     <div className="movie-page">
       {props.movieDetails ? (
         <div className="movie-page-info">
-          <div className="movie-page-info_image">
-            <img src={props.movieDetails.image} alt="poster" />
-          </div>
-          <div className="movie-page-info_text">
-            <h1>{props.movieDetails.name}</h1>
-            <p>{props.movieDetails.description}</p>
-          </div>
+          <MovieBanner movieDetails={props.movieDetails} />
           <div className="cast-section">
             <h2>Cast</h2>
             {props.movieCast.map((char) => (
