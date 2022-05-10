@@ -73,9 +73,9 @@
 }
 
 .movie-page-info {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; */
 }
 
 .movie-banner {
@@ -188,8 +188,10 @@ input:hover  {
   margin: 0 3px
 }
 
-.createList {
-  /* left: 50%; */
+.createList,
+.movie-banner-rapper {
+  display: flex;
+  justify-content: center;
 }
 
 .add-list-section {
@@ -216,7 +218,8 @@ input:hover  {
   margin: 30px 0
 }
 
-.guess-list-section {
+.guess-list-section,
+.cast-score {
   padding: 2.5em 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, 320px);

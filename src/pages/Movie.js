@@ -170,8 +170,10 @@ const Movie = (props) => {
     <div>
       {props.movieDetails ? (
         <div className="movie-page">
-          <div className="movie-page-info">
+          <div className="movie-banner-rapper">
             <MovieBanner movieDetails={props.movieDetails} />
+          </div>
+          <div className="cast-score">
             <div className="cast-section">
               <h2>Cast</h2>
               {props.movieCast.map((char) => (
@@ -199,15 +201,14 @@ const Movie = (props) => {
                 </button>
               </div>
             </div>
-            <div>
-              <Scoreboard allGuessLists={allGuessLists} />
-            </div>
-            <div className="createList">
-              <CreateNewList
-                handleGuessListChange={handleGuessListChange}
-                handleGuessListSubmit={handleGuessListSubmit}
-              />
-            </div>
+
+            <Scoreboard allGuessLists={allGuessLists} />
+          </div>
+          <div className="createList">
+            <CreateNewList
+              handleGuessListChange={handleGuessListChange}
+              handleGuessListSubmit={handleGuessListSubmit}
+            />
           </div>
           <div className="guess-list-section">
             {allGuessLists.map((list) => (
