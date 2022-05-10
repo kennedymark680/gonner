@@ -44,7 +44,6 @@ function App() {
   const checkToken = async () => {
     const user = await CheckSession()
     setUser(user)
-    console.log(user)
     toggleAuthenticated(true)
   }
 
@@ -64,7 +63,6 @@ function App() {
   const handleMovieSubmit = async (e) => {
     e.preventDefault()
     const res = await axios.post(`${apiUrl}/api/movie/create`, movieForm)
-    console.log(res.data)
   }
 
   // -------- GET REQUESTS ----------
@@ -77,21 +75,12 @@ function App() {
   const getAllMovies = async () => {
     const res = await axios.get(`${apiUrl}/api/movie`)
     setAllMovies(res.data)
-    console.log(allMovies)
   }
 
   const getCastByMovieId = async (movieId) => {
-    // setMovieCast([])
-    // const res = await axios.get(`${apiUrl}/api/castmember/${movieId}`)
-    // setMovieCast(res.data)
-    // console.log(movieCast, 'movieCast State')
-    // console.log(res.data, 'res.data getCast')
-    axios
-      .get(`${apiUrl}/api/castmember/${movieId}`)
-      .then((res) => {
-        setMovieCast(res.data)
-      })
-      .then(console.log(movieCast, 'movieCast'))
+    axios.get(`${apiUrl}/api/castmember/${movieId}`).then((res) => {
+      setMovieCast(res.data)
+    })
   }
 
   // ---------- DELETES ------------
@@ -101,14 +90,13 @@ function App() {
     getCastByMovieId(movieId)
     getMovieDetails(movieId)
 
-    let newOrder = movieDetails.gonnerOrder - 1
-    console.log(movieDetails.gonnerOrder, 'gonnerOrder')
-    console.log(newOrder, 'newOrder')
-    const resMovie = await axios.put(`${apiUrl}/api/movie/${movieId}`, {
-      gonnerOrder: newOrder
-    })
-    getMovieDetails(movieId)
-    console.log(movieDetails, 'after delete and update')
+    if (movieDetails.gonnerOrder > 1) {
+      let newOrder = movieDetails.gonnerOrder - 1
+      const resMovie = await axios.put(`${apiUrl}/api/movie/${movieId}`, {
+        gonnerOrder: newOrder
+      })
+      getMovieDetails(movieId)
+    }
   }
 
   // --------- NAVIGATE ---------------

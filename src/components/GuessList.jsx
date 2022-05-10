@@ -44,6 +44,11 @@ const GuessList = (props) => {
  
   useEffect(() => {
     getCharactersByListId()
+
+    const interval = setInterval(() => {
+      getCharactersByListId()
+    }, 1000)
+    return () => clearInterval(interval)
   }, [])
 
   return (

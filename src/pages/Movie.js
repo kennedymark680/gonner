@@ -14,7 +14,7 @@ const Movie = (props) => {
   const [characterList, setCharacterList] = useState([])
   const [allGuessLists, setAllGuessLists] = useState([])
   const [guessListName, setGuessListName] = useState({
-    name: `${props.user.username}`,
+    name: props.user ? `${props.user.username}` : '',
     score: 0,
     gonnerOrder: 1
   })
@@ -34,12 +34,32 @@ const Movie = (props) => {
     props.getCastByMovieId(movieId)
   }
 
+  const updateScore = async (selectedCast, allGuessLists) => {
+    // allGuessLists.forEach(async (list) => {
+    for (const list of allGuessLists) {
+      const foundChar = list.Characters.filter(
+        (char) => selectedCast.name === char.name
+      )
+      const difference = Math.abs(selectedCast.order - foundChar[0].order)
+      let score = 0
+      if (difference === 0) {
+        score = 3
+      } else if (difference === 1) {
+        score = 1
+      }
+      const newGuessList = await axios.put(
+        `${apiUrl}/api/guesslist/score/${list.id}`,
+        {
+          score: score
+        }
+      )
+    }
+    getAllGuessLists()
+  }
+
   const handleDeath = async (castmemberId) => {
     // Check if gonnerOrder isn't more than the number of cast members
-    console.log(props.movieDetails.gonnerOrder)
     if (props.movieDetails.gonnerOrder <= props.movieCast.length) {
-      props.getMovieDetails(movieId)
-
       // Set Cast Members gonner order
       const resCastMember = await axios.put(
         `${apiUrl}/api/castmember/${castmemberId}`,
@@ -48,46 +68,16 @@ const Movie = (props) => {
           order: props.movieDetails.gonnerOrder
         }
       )
+      let selectedCast = resCastMember.data[0]
+
+      updateScore(selectedCast, allGuessLists)
 
       // Increment and set the new movies gonner order
       const newOrder = props.movieDetails.gonnerOrder + 1
       const resMovie = await axios.put(`${apiUrl}/api/movie/${movieId}`, {
         gonnerOrder: newOrder
       })
-      props.getMovieDetails(movieId)
       props.getCastByMovieId(movieId)
-
-      // Create the array of gonners
-      let gonnerArray = []
-
-      axios.get(`${apiUrl}/api/castmember/${movieId}`).then((res) => {
-        res.data.forEach((actor) => {
-          if (!actor.alive) {
-            gonnerArray.push(actor)
-            console.log(gonnerArray, 'gonnerArray')
-          }
-        })
-      })
-
-      // console.log(props.movieCast, 'props.movieCast')
-      // props.movieCast.forEach((actor) => {
-      //   if (!actor.alive) {
-      //     gonnerArray.push(actor)
-      //     console.log(gonnerArray, 'gonnerArray')
-      //   }
-      // })
-
-      // Check the score for ever guess list
-      for (let i = 0; i < allGuessLists.length; i++) {
-        const getCharactersByListId = async () => {
-          const characters = await axios.get(
-            `${apiUrl}/api/character/${allGuessLists[i].id}`
-          )
-          setCharacterList(characters.data)
-          checkScore(props.movieCast, characters.data, allGuessLists[i].id)
-        }
-        getCharactersByListId()
-      }
     }
   }
 
@@ -99,7 +89,6 @@ const Movie = (props) => {
   const handleGuessListSubmit = async (e) => {
     e.preventDefault()
     // creating the GUESS LIST
-    console.log(props.user.username)
     const res = await axios.post(
       `${apiUrl}/api/guesslist/${movieId}`,
       guessListName
@@ -164,6 +153,13 @@ const Movie = (props) => {
     props.getMovieDetails(movieId)
     props.getCastByMovieId(movieId)
     getAllGuessLists()
+
+    const interval = setInterval(() => {
+      getAllGuessLists()
+      props.getMovieDetails(movieId)
+      props.getCastByMovieId(movieId)
+    }, 1000)
+    return () => clearInterval(interval)
   }, [])
 
   return (
@@ -203,7 +199,6 @@ const Movie = (props) => {
               />
             </div>
             <button onClick={() => handleCastSubmit(movieId)}>Add</button>
-            <button onClick={() => console.log()}>Increase</button>
           </div>
           <div className="createList">
             <h2>Create New List</h2>
