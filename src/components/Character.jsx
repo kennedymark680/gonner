@@ -10,7 +10,7 @@ const Character = (props) => {
   }
 
   const survivorClicked = () => {
-    toggleClickedSurvivor(!clickedGonner)
+    toggleClickedSurvivor(!clickedSurvivor)
   }
 
   return (
@@ -19,8 +19,8 @@ const Character = (props) => {
       <h4>{props.name}</h4>
       <div className="character-buttons">
 
-        <button onClick={() => (props.handleGonner(props.id), gonnerClicked())} className={ clickedGonner ? 'gonner-button' : null}>Gonner</button>
-        <button onClick={() => (survivorClicked())} className={ clickedSurvivor ? 'survivor-button' : null}>Survivor</button>
+        <button onClick={!clickedSurvivor ? () => (props.handleGonner(props.id), gonnerClicked()) : null} className={ clickedGonner ? 'gonner-button' : null}>Gonner</button>
+        <button onClick={!clickedGonner ? () => survivorClicked() : null} className={ clickedSurvivor ? 'survivor-button' : null}>Survivor</button>
       </div>
     </div>
   )
