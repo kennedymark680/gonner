@@ -1,10 +1,13 @@
 import Leader from "./Leader"
 
-const Scoreboard = ({allGuessLists}) => {
+const Scoreboard = ({sortedLeaders}) => {
+
+  
+
   return (
     <div className="scoreboard">
       <h2>Scoreboard</h2>
-      {allGuessLists.map((list) => (
+      {sortedLeaders.map((list) => (
         <Leader list={list}/>
       )
       )}

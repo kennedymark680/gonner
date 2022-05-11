@@ -15,7 +15,7 @@ const Movie = (props) => {
 
   // ----------- STATE -----------------
 
-  const [characterList, setCharacterList] = useState([])
+  const [sortedLeaders, setSortedLeaders] = useState([])
   const [allGuessLists, setAllGuessLists] = useState([])
   const [guessListName, setGuessListName] = useState({
     name: props.user ? `${props.user.username}` : '',
@@ -113,6 +113,7 @@ const Movie = (props) => {
   const getAllGuessLists = async () => {
     const res = await axios.get(`${apiUrl}/api/guesslist/${movieId}`)
     setAllGuessLists(res.data)
+    sortLeaders(res.data)
   }
 
   const createCharacters = async (guesslistId, character) => {
@@ -150,14 +151,15 @@ const Movie = (props) => {
         score: newScore
       }
     )
-    getAllGuessLists()
+    // getAllGuessLists()
+  }
+
+  const sortLeaders = (scrambled) => {
+    let sortedLeaders = scrambled.sort((a, b) => b.score - a.score)
+    setSortedLeaders(sortedLeaders)
   }
 
   useEffect(() => {
-    props.getMovieDetails(movieId)
-    props.getCastByMovieId(movieId)
-    getAllGuessLists()
-
     const interval = setInterval(() => {
       getAllGuessLists()
       props.getMovieDetails(movieId)
@@ -202,7 +204,7 @@ const Movie = (props) => {
               </div>
             </div>
 
-            <Scoreboard allGuessLists={allGuessLists} />
+            <Scoreboard sortedLeaders={sortedLeaders} />
           </div>
           <div className="createList">
             <CreateNewList
