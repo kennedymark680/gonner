@@ -3,6 +3,13 @@
   padding: none;
 }
 
+.gonner-logo {
+  background-image: url("https://i.ibb.co/T4H2pj2/Screen-Shot-2022-05-04-at-10-13-34-PM.png");
+  width: 90vw;
+  height: 40vh;
+  background-size: cover;
+}
+
 .homePage {
   background-color: aliceblue;
   min-height: 100vh;

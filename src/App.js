@@ -8,6 +8,7 @@ import Movie from './pages/Movie'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import Landing from './pages/Landing'
 
 function App() {
   let navigate = useNavigate()
@@ -51,7 +52,6 @@ function App() {
 
   const handleMovieChange = (e) => {
     setMovieForm({ ...movieForm, [e.target.name]: e.target.value })
-    console.log(movieForm)
   }
 
   const handleCastChange = (e) => {
@@ -63,6 +63,7 @@ function App() {
   const handleMovieSubmit = async (e) => {
     e.preventDefault()
     const res = await axios.post(`${apiUrl}/api/movie/create`, movieForm)
+    getAllMovies()
   }
 
   // -------- GET REQUESTS ----------
@@ -119,6 +120,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
+        <Route path="/" element={<Landing />} />
         <Route
           path="/movie/:movieId"
           element={
