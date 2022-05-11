@@ -2,7 +2,7 @@ const CreateNewList = (props) => {
   return (
     <div className="add-list-section">
         <div>
-          <input name="name" onChange={props.handleGuessListChange} placeholder="New List Name"/>
+          <input name="name" onChange={props.handleGuessListChange} placeholder="List Name" value={props.guessListName.name}/>
           <button className="add-list" onClick={props.handleGuessListSubmit}>
               Add
           </button>

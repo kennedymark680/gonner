@@ -121,6 +121,12 @@ const Movie = (props) => {
       }
       createCharacters(res.data.id, character)
     }
+
+    setGuessListName({
+      name: '',
+      score: 0,
+      gonnerOrder: 1
+    })
     getAllGuessLists()
   }
 
@@ -224,6 +230,7 @@ const Movie = (props) => {
           </div>
           <div className="createList">
             <CreateNewList
+              guessListName={guessListName}
               handleGuessListChange={handleGuessListChange}
               handleGuessListSubmit={handleGuessListSubmit}
             />

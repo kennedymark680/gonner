@@ -222,12 +222,36 @@ input:hover  {
   align-items: center;
 }
 
+.character-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
 .cast button,
 .character button {
   border: none;
   height: 30px;
   border-radius: 5px;
   margin: 0 3px
+}
+
+.character button {
+  margin: 3px;
+  height: 20px;
+}
+
+.gonner-button {
+  background-color: #B22727;
+  color: white;
+  transform: scale(1.08);
+}
+
+.survivor-button {
+  background-color: #007f61;
+  color: white;
+  transform: scale(1.08);
 }
 
 .createList,
