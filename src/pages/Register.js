@@ -3,7 +3,7 @@ import { RegisterUser } from '../services/Auth'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-const Register = () => {
+const Register = (props) => {
   let navigate = useNavigate()
 
   const [formValues, setFormValues] = useState({
@@ -61,7 +61,8 @@ const Register = () => {
       password: '',
       confirmPassword: ''
     })
-    navigate('/login')
+    props.toggleLogin()
+    props.toggleRegister()
   }
 
   return (
@@ -117,7 +118,7 @@ const Register = () => {
                 formValues.confirmPassword === formValues.password)
             }
           >
-            Sign In
+            Register
           </button>
         </form>
       </div>

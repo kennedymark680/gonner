@@ -24,22 +24,23 @@ const Login = ({ setUser, toggleAuthenticated }) => {
       <h1>Login!</h1>
       <div className="login-forms">
         <div className="input-wrapper">
-          <label htmlFor="username">Username </label>
+          <label htmlFor="username"></label>
           <input
             onChange={handleChange}
             name="username"
             type="username"
-            placeholder="Choose Username"
+            placeholder="Username"
             value={formValues.username}
             required
           />
         </div>
         <div className="input-wrapper">
-          <label htmlFor="password">Password </label>
+          <label htmlFor="password"></label>
           <input
             onChange={handleChange}
             type="password"
             name="password"
+            placeholder="Password"
             value={formValues.password}
             required
           />

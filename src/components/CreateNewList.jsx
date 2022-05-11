@@ -1,9 +1,8 @@
 const CreateNewList = (props) => {
   return (
     <div className="add-list-section">
-      <h2>Create New List</h2>
         <div>
-          <input name="name" onChange={props.handleGuessListChange} placeholder="List Name"/>
+          <input name="name" onChange={props.handleGuessListChange} placeholder="New List Name"/>
           <button className="add-list" onClick={props.handleGuessListSubmit}>
               Add
           </button>

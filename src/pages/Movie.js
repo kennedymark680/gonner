@@ -39,7 +39,6 @@ const Movie = (props) => {
   }
 
   const updateScore = async (selectedCast, allGuessLists) => {
-    // allGuessLists.forEach(async (list) => {
     for (const list of allGuessLists) {
       const foundChar = list.Characters.filter(
         (char) => selectedCast.name === char.name
@@ -83,6 +82,21 @@ const Movie = (props) => {
       })
       props.getCastByMovieId(movieId)
     }
+  }
+
+  const handleLived = async (castMember, allGuessLists) => {
+    for (const list of allGuessLists) {
+      const foundChar = list.Characters.filter(
+        (char) => castMember.name === char.name
+      )
+
+      if (foundChar[0].alive) {
+        await axios.put(`${apiUrl}/api/guesslist/score/${list.id}`, {
+          score: 3
+        })
+      }
+    }
+    getAllGuessLists()
   }
 
   // ----- GUESS LIST -----
@@ -185,6 +199,8 @@ const Movie = (props) => {
                   handleDeath={handleDeath}
                   deleteCastMember={props.deleteCastMember}
                   movieId={movieId}
+                  handleLived={handleLived}
+                  allGuessLists={allGuessLists}
                 />
               ))}
               <div>

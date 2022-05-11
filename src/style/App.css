@@ -1,6 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@700&family=Nunito:wght@700&family=Permanent+Marker&family=Roboto+Mono:ital@1&display=swap');
 * {
   margin: none;
   padding: none;
+}
+
+.App {
+  font-family: 'Nunito', sans-serif;
 }
 
 .gonner-logo {
@@ -8,6 +13,32 @@
   width: 90vw;
   height: 40vh;
   background-size: cover;
+}
+
+.register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 300px;
+
+  background-color: aliceblue;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  border-radius: 5px;
+}
+
+.register h1 {
+  text-align: center;
+}
+
+.forms {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.forms button {
+  margin: 20px 0;
 }
 
 .homePage {
@@ -180,6 +211,10 @@
 input:hover  {
   cursor: pointer;
   animation: zoom2 .1s linear forwards;
+}
+
+.cast {
+  font-family: 'Permanent Marker', cursive;
 }
 
 .cast-buttons {
