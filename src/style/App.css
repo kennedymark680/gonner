@@ -96,9 +96,9 @@
 }
 
 .movie-list {
-  padding: .5em 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 320px);
+  padding: 1.5em 0;
+  display: flex;
+  flex-wrap: wrap;
   grid-gap: 1.5em 2em;
   justify-content: center;
 }
@@ -391,8 +391,8 @@ input:hover  {
 
 .guess-list-section {
   padding: .5em 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 320px);
+  display: flex;
+  flex-wrap: wrap;
   grid-gap: 2.5em;
   justify-content: center;
   max-width: 730px;
