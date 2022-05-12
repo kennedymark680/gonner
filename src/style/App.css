@@ -61,8 +61,40 @@
 }
 
 .homePage {
-  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   min-height: 100vh;
+  background-color: #AFD0DB;
+}
+
+.home-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 80vw;
+  height: 30vh;
+
+  max-width: 690px;
+  background-color: white;
+  box-shadow: 10px 5px 5px 	#c5c5c5;
+  border-radius: 10px;
+
+  margin: 30px 0 0 0;
+}
+
+.home-banner h4 {
+  margin: 10px 0 0 0;
+  color: #AA0200
+}
+
+.gonner-logo-home {
+  width: 80vw;
+  max-width: 400px;
+  height: auto;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .movie-list {
@@ -148,7 +180,7 @@
 
   max-width: 690px;
 
-  background-color: #B22727;
+  background-color: #2B3956;
   box-shadow: 10px 5px 5px 	#c5c5c5;
   border-radius: 10px;
 
@@ -178,13 +210,13 @@
   width: 325px;
   min-height: 30vh;
 
-  background-color: #006E7F;
+  background-color: #4B7196;
   box-shadow: 10px 5px 5px 	#c5c5c5;
   border-radius: 10px;
 }
 
 .guessList {
-  background-color: #c47617;
+  background-color: #AFD0DB;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -338,7 +370,7 @@ input:hover  {
   
   /* min-height: 10vh; */
   
-  background-color: #F8CB2E;
+  background-color: #E4EFF0;
   box-shadow: 10px 5px 5px 	#c5c5c5;
   border-radius: 5px;
 }

@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import MovieCard from '../components/MovieCard'
+import HomeBanner from '../components/HomeBanner'
 
 const Home = (props) => {
   useEffect(() => {
@@ -8,6 +9,7 @@ const Home = (props) => {
 
   return (
     <div className="homePage">
+      <HomeBanner />
       <div className="movie-list">
         {props.allMovies.map((movie) => (
           <MovieCard
