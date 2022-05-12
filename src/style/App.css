@@ -79,7 +79,7 @@
   max-width: 690px;
   background-color: white;
   box-shadow: 10px 5px 5px 	#c5c5c5;
-  border-radius: 10px;
+  border-radius: 5px;
 
   margin: 30px 0 0 0;
 }
@@ -113,7 +113,7 @@
 
   background-color: white;
 
-  border-radius: 10px;
+  border-radius: 5px;
 
   display: flex;
   align-items: center;
@@ -151,11 +151,12 @@
 
 .movie-card-image {
   height: 390px;
-  width: 264px;
+  width: auto;
   background-size: contain;
   background-repeat: no-repeat;
-  border-radius: 10px;
+  border-radius: 5px;
   overflow: hidden;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.2);
   
 }
 
@@ -184,7 +185,7 @@
 
   background-color: #2B3956;
   box-shadow: 10px 5px 5px 	#c5c5c5;
-  border-radius: 10px;
+  border-radius: 5px;
 
   margin: 30px 0 0 0;
 }
@@ -214,7 +215,7 @@
 
   background-color: #4B7196;
   box-shadow: 10px 5px 5px 	#c5c5c5;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .guessList {
@@ -281,6 +282,7 @@
 .cast-section:hover,
 .guessList:hover,
 .add-list-section:hover,
+.movie-card-image:hover,
 .leader:hover {
     cursor: pointer;
     animation: zoom .1s linear forwards;
