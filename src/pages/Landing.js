@@ -3,6 +3,7 @@ import Login from './Login'
 import Register from './Register'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import GonnerLogo from '../resources/gonner.png'
 
 const Landing = ({ setUser, toggleAuthenticated }) => {
   let navigate = useNavigate()
@@ -19,8 +20,7 @@ const Landing = ({ setUser, toggleAuthenticated }) => {
 
   return (
     <div className="landing">
-      <NavBar />
-      <div className="gonner-logo"></div>
+      <img src={GonnerLogo} alt="gonnerLogo" className="gonner-logo" />
       <div className="landing-buttons">
         <button onClick={() => toggleLogin()}>Login</button>
         <button onClick={() => toggleRegister()}>Register</button>

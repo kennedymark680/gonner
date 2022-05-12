@@ -47,7 +47,7 @@ const Login = ({ setUser, toggleAuthenticated }) => {
         </div>
         <div>
           <button
-            className="glow-on-hover-login"
+            className="login-button"
             onClick={handleSubmit}
             disabled={!formValues.username || !formValues.password}
           >
