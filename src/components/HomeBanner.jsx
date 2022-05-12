@@ -1,10 +1,10 @@
-import GonnerLogo from '../resources/gonner.png'
+import GonnerLogoTran from '../resources/gonnerTran.png'
 
 const HomeBanner = () => {
   return (
     <div className="home-banner">
-      <h4>Welcome to</h4>
-      <img src={GonnerLogo} alt="gonnerLogo" className="gonner-logo-home" />
+      <img src={GonnerLogoTran} alt="gonnerLogo" className="gonner-logo-home" />
+      <button className='learn-to-play'>Learn to Play</button>
     </div>
   )
 }

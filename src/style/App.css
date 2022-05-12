@@ -84,17 +84,15 @@
   margin: 30px 0 0 0;
 }
 
-.home-banner h4 {
-  margin: 10px 0 0 0;
-  color: #AA0200
-}
 
 .gonner-logo-home {
+  
   width: 80vw;
   max-width: 400px;
   height: auto;
   background-size: contain;
   background-repeat: no-repeat;
+  margin: 30px 0 0 0;
 }
 
 .movie-list {
@@ -251,15 +249,22 @@
 
 .landing-buttons button,
 .register-button,
-.login-button {
+.login-button,
+.learn-to-play {
   margin: 20px;
   height: 30px;
   width: 100px;
 
   border: 2px #B22727 solid;
   border-radius: 5px;
-  background-color: #b2272722;
+  background-color: white;
   color: #701919;
+}
+
+.learn-to-play {
+  margin: 0 60px 30px 0;
+  align-self: end;
+
 }
 
 .register-button,
@@ -286,6 +291,7 @@
 .landing-buttons button:hover,
 .register-button:hover,
 .login-button:hover,
+.learn-to-play:hover,
 input:hover  {
   cursor: pointer;
   animation: zoom2 .1s linear forwards;
@@ -293,7 +299,8 @@ input:hover  {
 
 .landing-buttons button:hover,
 .register-button:hover,
-.login-button:hover {
+.login-button:hover,
+.learn-to-play:hover {
   background-color: #B22727;
   color: white;
   box-shadow:0 0 15px 4px rgba(0,0,0,0.2);
