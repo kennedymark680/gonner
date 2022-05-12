@@ -84,9 +84,13 @@
   margin: 30px 0 0 0;
 }
 
+.banner-text {
+  align-self: flex-start;
+  color: #AA0200;
+  margin: 15px 0 0 30px;
+}
 
 .gonner-logo-home {
-  
   width: 80vw;
   max-width: 400px;
   height: auto;

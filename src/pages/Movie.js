@@ -56,6 +56,13 @@ const Movie = (props) => {
           score: score
         }
       )
+
+      const res = await axios.put(
+        `${apiUrl}/api/character/${foundChar[0].id}`,
+        {
+          alive: false
+        }
+      )
     }
     getAllGuessLists()
   }
