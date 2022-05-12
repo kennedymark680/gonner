@@ -15,10 +15,12 @@
 }
 
 .gonner-logo {
-  background-image: url(../resources/gonner.png);
+  background-image: url(../resources/gonner.svg);
   width: 80vw;
   height: 50vh;
-  background-size: cover;
+  margin: 10vh 0 5vh 0;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .register {
@@ -204,6 +206,10 @@
   text-align: center;
 }
 
+.landing-buttons button {
+  margin: 20px;
+}
+
 .cast:hover,
 .character:hover,
 .cast-section:hover,
@@ -220,6 +226,7 @@
 .character button:hover,
 .remove-list:hover,
 .add-list:hover,
+.landing-buttons:hover,
 input:hover  {
   cursor: pointer;
   animation: zoom2 .1s linear forwards;
