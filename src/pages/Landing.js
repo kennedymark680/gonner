@@ -18,7 +18,7 @@ const Landing = ({ setUser, toggleAuthenticated }) => {
   }
 
   return (
-    <div>
+    <div className="landing">
       <NavBar />
       <div className="gonner-logo"></div>
       <div className="landing-buttons">
