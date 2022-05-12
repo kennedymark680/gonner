@@ -2,9 +2,13 @@ import './style/App.css'
 import { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import { CheckSession } from './services/Auth'
 import axios from 'axios'
 import Movie from './pages/Movie'
 import Home from './pages/Home'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Landing from './pages/Landing'
 
 function App() {
   let navigate = useNavigate()
@@ -13,6 +17,8 @@ function App() {
 
   // ------- STATE LIVE HERE -----------
 
+  const [authenticated, toggleAuthenticated] = useState(false)
+  const [user, setUser] = useState(null)
   const [allMovies, setAllMovies] = useState([])
   const [movieDetails, setMovieDetails] = useState({})
   const [movieCast, setMovieCast] = useState([])
@@ -28,11 +34,24 @@ function App() {
     gonnerOrder: 1
   })
 
+  // ------- AUTH FUNCTIONS --------
+
+  const handleLogout = () => {
+    setUser(null) //Once logged out, the user no longer has pilgrim priviledges
+    toggleAuthenticated(false) // Once logged out, the user is no longer authenticated
+    localStorage.clear()
+  }
+  // Check each time if the user is a pilgrim and authenticated to make certain commands
+  const checkToken = async () => {
+    const user = await CheckSession()
+    setUser(user)
+    toggleAuthenticated(true)
+  }
+
   // ------ HANDLE CHANGES --------
 
   const handleMovieChange = (e) => {
     setMovieForm({ ...movieForm, [e.target.name]: e.target.value })
-    console.log(movieForm)
   }
 
   const handleCastChange = (e) => {
@@ -44,7 +63,7 @@ function App() {
   const handleMovieSubmit = async (e) => {
     e.preventDefault()
     const res = await axios.post(`${apiUrl}/api/movie/create`, movieForm)
-    console.log(res.data)
+    getAllMovies()
   }
 
   // -------- GET REQUESTS ----------
@@ -57,12 +76,12 @@ function App() {
   const getAllMovies = async () => {
     const res = await axios.get(`${apiUrl}/api/movie`)
     setAllMovies(res.data)
-    console.log(allMovies)
   }
 
   const getCastByMovieId = async (movieId) => {
-    const res = await axios.get(`${apiUrl}/api/castmember/${movieId}`)
-    setMovieCast(res.data)
+    axios.get(`${apiUrl}/api/castmember/${movieId}`).then((res) => {
+      setMovieCast(res.data)
+    })
   }
 
   // ---------- DELETES ------------
@@ -72,14 +91,13 @@ function App() {
     getCastByMovieId(movieId)
     getMovieDetails(movieId)
 
-    let newOrder = movieDetails.gonnerOrder - 1
-    console.log(movieDetails.gonnerOrder, 'gonnerOrder')
-    console.log(newOrder, 'newOrder')
-    const resMovie = await axios.put(`${apiUrl}/api/movie/${movieId}`, {
-      gonnerOrder: newOrder
-    })
-    getMovieDetails(movieId)
-    console.log(movieDetails, 'after delete and update')
+    if (movieDetails.gonnerOrder > 1) {
+      let newOrder = movieDetails.gonnerOrder - 1
+      const resMovie = await axios.put(`${apiUrl}/api/movie/${movieId}`, {
+        gonnerOrder: newOrder
+      })
+      getMovieDetails(movieId)
+    }
   }
 
   // --------- NAVIGATE ---------------
@@ -88,15 +106,34 @@ function App() {
     navigate(`/movie/${movieId}`)
   }
 
+  // --------- USE EFFECT ------------
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      checkToken()
+    }
+  }, [])
+
   // --------- OTHER FUNCTIONS -------
 
   return (
     <div className="App">
       <Routes>
         <Route
+          path="/"
+          element={
+            <Landing
+              setUser={setUser}
+              toggleAuthenticated={toggleAuthenticated}
+            />
+          }
+        />
+        <Route
           path="/movie/:movieId"
           element={
             <Movie
+              user={user}
               getMovieDetails={getMovieDetails}
               movieDetails={movieDetails}
               handleCastChange={handleCastChange}
@@ -111,7 +148,17 @@ function App() {
           }
         />
         <Route
-          path="/"
+          path="/login"
+          element={
+            <Login
+              setUser={setUser}
+              toggleAuthenticated={toggleAuthenticated}
+            />
+          }
+        />
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/home"
           element={
             <Home
               getAllMovies={getAllMovies}

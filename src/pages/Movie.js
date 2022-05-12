@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import GuessList from '../components/GuessList'
+import Cast from '../components/Cast'
+import CreateNewList from '../components/CreateNewList'
+import MovieBanner from '../components/MovieBanner'
+import Scoreboard from '../components/Scoreboard'
 
 const Movie = (props) => {
   // -------- VARIABLES --------------
@@ -11,9 +15,10 @@ const Movie = (props) => {
 
   // ----------- STATE -----------------
 
+  const [sortedLeaders, setSortedLeaders] = useState([])
   const [allGuessLists, setAllGuessLists] = useState([])
   const [guessListName, setGuessListName] = useState({
-    name: '',
+    name: props.user ? `${props.user.username}` : '',
     score: 0,
     gonnerOrder: 1
   })
@@ -33,27 +38,65 @@ const Movie = (props) => {
     props.getCastByMovieId(movieId)
   }
 
-  const handleDeath = async (castmemberId) => {
-    props.getMovieDetails(movieId)
-    console.log(props.movieDetails.gonnerOrder, 'handle death')
-
-    const resCastMember = await axios.put(
-      `${apiUrl}/api/castmember/${castmemberId}`,
-      {
-        alive: false,
-        order: props.movieDetails.gonnerOrder
+  const updateScore = async (selectedCast, allGuessLists) => {
+    for (const list of allGuessLists) {
+      const foundChar = list.Characters.filter(
+        (char) => selectedCast.name === char.name
+      )
+      const difference = Math.abs(selectedCast.order - foundChar[0].order)
+      let score = 0
+      if (difference === 0) {
+        score = 3
+      } else if (difference === 1) {
+        score = 1
       }
-    )
+      const newGuessList = await axios.put(
+        `${apiUrl}/api/guesslist/score/${list.id}`,
+        {
+          score: score
+        }
+      )
+    }
+    getAllGuessLists()
+  }
 
-    const newOrder = props.movieDetails.gonnerOrder + 1
-    const resMovie = await axios.put(`${apiUrl}/api/movie/${movieId}`, {
-      gonnerOrder: newOrder
-    })
-    console.log(resMovie.data, 'updated order')
-    props.getMovieDetails(movieId)
-    console.log(props.movieDetails.gonnerOrder, 'call again')
+  const handleDeath = async (castmemberId) => {
+    // Check if gonnerOrder isn't more than the number of cast members
+    if (props.movieDetails.gonnerOrder <= props.movieCast.length) {
+      // Set Cast Members gonner order
+      const resCastMember = await axios.put(
+        `${apiUrl}/api/castmember/${castmemberId}`,
+        {
+          alive: false,
+          order: props.movieDetails.gonnerOrder
+        }
+      )
+      let selectedCast = resCastMember.data[0]
 
-    props.getCastByMovieId(movieId)
+      updateScore(selectedCast, allGuessLists)
+
+      // Increment and set the new movies gonner order
+      const newOrder = props.movieDetails.gonnerOrder + 1
+      const resMovie = await axios.put(`${apiUrl}/api/movie/${movieId}`, {
+        gonnerOrder: newOrder
+      })
+      props.getCastByMovieId(movieId)
+    }
+  }
+
+  const handleLived = async (castMember, allGuessLists) => {
+    for (const list of allGuessLists) {
+      const foundChar = list.Characters.filter(
+        (char) => castMember.name === char.name
+      )
+
+      if (foundChar[0].alive) {
+        await axios.put(`${apiUrl}/api/guesslist/score/${list.id}`, {
+          score: 3
+        })
+      }
+    }
+    getAllGuessLists()
   }
 
   // ----- GUESS LIST -----
@@ -64,16 +107,13 @@ const Movie = (props) => {
   const handleGuessListSubmit = async (e) => {
     e.preventDefault()
     // creating the GUESS LIST
-    console.log(guessListName, 'gonnerOrder')
     const res = await axios.post(
       `${apiUrl}/api/guesslist/${movieId}`,
       guessListName
     )
-    console.log(res.data.id, 'list submit')
 
     // creating each CHARACTER for the list
     for (let i = 0; i < props.movieCast.length; i++) {
-      console.log(props.movieCast[i].name)
       let character = {
         name: props.movieCast[i].name,
         order: 0,
@@ -81,13 +121,19 @@ const Movie = (props) => {
       }
       createCharacters(res.data.id, character)
     }
+
+    setGuessListName({
+      name: '',
+      score: 0,
+      gonnerOrder: 1
+    })
     getAllGuessLists()
   }
 
   const getAllGuessLists = async () => {
     const res = await axios.get(`${apiUrl}/api/guesslist/${movieId}`)
-    console.log(res.data)
     setAllGuessLists(res.data)
+    sortLeaders(res.data)
   }
 
   const createCharacters = async (guesslistId, character) => {
@@ -95,61 +141,102 @@ const Movie = (props) => {
       `${apiUrl}/api/character/${guesslistId}`,
       character
     )
-    console.log(charRes, 'each actor created')
+  }
+
+  // ------- CHECKING SCORE ---------
+  const checkScore = async (cast, guessList, guessListId) => {
+    // Set the score to zero first
+    let newScore = 0
+
+    cast.forEach((char, index) => {
+      // console.log(char.name, 'char.name', index)
+      // console.log(guessList[index].name, 'guessList[index].name', index)
+      if (char.name === guessList[index].name) {
+        newScore += 3
+      } else if (
+        index < cast.length &&
+        char.name === guessList[index + 1].name
+      ) {
+        newScore += 1
+      } else if (index > 0 && char.name === guessList[index - 1].name) {
+        newScore += 1
+      } else {
+        newScore += 0
+      }
+    })
+
+    const res = await axios.put(
+      `${apiUrl}/api/guesslist/score/${guessListId}`,
+      {
+        score: newScore
+      }
+    )
+    // getAllGuessLists()
+  }
+
+  const sortLeaders = (scrambled) => {
+    let sortedLeaders = scrambled.sort((a, b) => b.score - a.score)
+    setSortedLeaders(sortedLeaders)
   }
 
   useEffect(() => {
-    props.getMovieDetails(movieId)
-    props.getCastByMovieId(movieId)
-    getAllGuessLists()
+    const interval = setInterval(() => {
+      getAllGuessLists()
+      props.getMovieDetails(movieId)
+      props.getCastByMovieId(movieId)
+    }, 1000)
+    return () => clearInterval(interval)
   }, [])
 
   return (
-    <div className="movie-page">
+    <div>
       {props.movieDetails ? (
-        <div className="movie-page-info">
-          <div className="movie-page-info_image">
-            <img src={props.movieDetails.image} alt="poster" />
+        <div className="movie-page">
+          <div className="movie-banner-rapper">
+            <MovieBanner movieDetails={props.movieDetails} />
           </div>
-          <div className="movie-page-info_text">
-            <h1>{props.movieDetails.name}</h1>
-            <p>{props.movieDetails.description}</p>
-          </div>
-          <div className="cast-section">
-            <h2>Cast</h2>
-            {props.movieCast.map((char) => (
-              <div key={char.id}>
-                <h4>
-                  {char.name}
-                  <button onClick={() => handleDeath(char.id)}>X</button>
+          <div className="cast-score-wrapper">
+            <div className="cast-score">
+              <div className="cast-section">
+                <h2>Cast</h2>
+                {props.movieCast.map((char) => (
+                  <Cast
+                    key={char.id}
+                    char={char}
+                    handleDeath={handleDeath}
+                    deleteCastMember={props.deleteCastMember}
+                    movieId={movieId}
+                    handleLived={handleLived}
+                    allGuessLists={allGuessLists}
+                  />
+                ))}
+                <div>
+                  <input
+                    name="name"
+                    type="text"
+                    placeholder="Cast Member"
+                    value={props.castForm.name}
+                    onChange={props.handleCastChange}
+                  />
                   <button
-                    onClick={() => props.deleteCastMember(char.id, movieId)}
+                    className="add-list"
+                    onClick={() => handleCastSubmit(movieId)}
                   >
-                    Delete
+                    Add
                   </button>
-                  <p>{char.order}</p>
-                </h4>
+                </div>
               </div>
-            ))}
-            <div>
-              <input
-                name="name"
-                type="text"
-                placeholder="Cast Member"
-                value={props.castForm.name}
-                onChange={props.handleCastChange}
-              />
+              <Scoreboard sortedLeaders={sortedLeaders} />
             </div>
-            <button onClick={() => handleCastSubmit(movieId)}>Add</button>
-            <button onClick={() => console.log()}>Increase</button>
           </div>
           <div className="createList">
-            <h2>Create New List</h2>
-            <input name="name" onChange={handleGuessListChange} />
-            <button onClick={handleGuessListSubmit}>Create List</button>
+            <CreateNewList
+              guessListName={guessListName}
+              handleGuessListChange={handleGuessListChange}
+              handleGuessListSubmit={handleGuessListSubmit}
+            />
           </div>
-          <button onClick={createCharacters}></button>
-          <div>
+          <div className="guess-list-section">
             {allGuessLists.map((list) => (
               <GuessList
                 key={list.id}
@@ -157,6 +244,9 @@ const Movie = (props) => {
                 gonnerOrder={list.gonnerOrder}
                 id={list.id}
                 name={list.name}
+                score={list.score}
+                getAllGuessLists={getAllGuessLists}
+                checkScore={checkScore}
               />
             ))}
           </div>

@@ -24,42 +24,44 @@ const GuessList = (props) => {
   }
 
   const handleGonner = async (charId) => {
-    console.log(charId)
     const resCharacter = await axios.put(`${apiUrl}/api/character/${charId}`, { order: props.gonnerOrder})
-    console.log(resCharacter)
+    
+    let newGonnerOrder = props.gonnerOrder + 1
+    const resGuessList = await axios.put(`${apiUrl}/api/guesslist/${props.id}`, { gonnerOrder: newGonnerOrder})
     getCharactersByListId()
   }
 
   const getCharactersByListId = async () => {
     const characters = await axios.get(`${apiUrl}/api/character/${props.id}`)
-    console.log(characters.data)
+    props.getAllGuessLists()
     setCharacters(characters.data)
+  }
+
+  const deleteList = async () => {
+    const list = await axios.delete(`${apiUrl}/api/guesslist/delete/${props.id}`)
+    props.getAllGuessLists()
   }
  
   useEffect(() => {
     getCharactersByListId()
+
+    const interval = setInterval(() => {
+      getCharactersByListId()
+    }, 1000)
+    return () => clearInterval(interval)
   }, [])
 
   return (
     <div className="guessList">
-      {/* <div>Guess List</div>
-      <input list='characters' name='characterSelection' onChange={handleCharacterChange} value={character}/>
-      <datalist id='characters'>
-        {props.movieCast.map((char) => (
-          <option value={char.name} key={char.id}/>
-        ))}
-      </datalist> */}
-      <button onClick={getCharactersByListId}>get characters</button>
-      <button onClick={handleCharacterCreate}>Create</button>
-      <div className="characterList">
-        <h3>{props.name}</h3>
+        <h2>{props.name}</h2>
+        <h3>Score: {props.score}</h3>
         {characters.map((char) => (
           <div>
             <Character key={char.id} name={char.name} id={char.id} order={char.order} handleGonner={handleGonner}/>
           </div>
         ))}
+        <button className='remove-list' onClick={() => deleteList()}>Remove List</button>
       </div>
-    </div>
   )
 }
 

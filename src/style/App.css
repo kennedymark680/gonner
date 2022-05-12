@@ -1,12 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@700&family=Nunito:wght@700&family=Permanent+Marker&family=Roboto+Mono:ital@1&display=swap');
+* {
+  margin: none;
+  padding: none;
+}
+
+.App {
+  font-family: 'Nunito', sans-serif;
+}
+
+.gonner-logo {
+  background-image: url("https://i.ibb.co/T4H2pj2/Screen-Shot-2022-05-04-at-10-13-34-PM.png");
+  width: 90vw;
+  height: 40vh;
+  background-size: cover;
+}
+
+.register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 300px;
+
+  background-color: aliceblue;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  border-radius: 5px;
+}
+
+.register h1 {
+  text-align: center;
+}
+
+.forms {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.forms button {
+  margin: 20px 0;
+}
+
+.homePage {
+  background-color: aliceblue;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .movie-card {
   height: 300px;
   width: 70vw;
-  background-color: #006E7F;
-  border-radius: 10px;
+  max-width: 700px;
+  min-width: 550px;
+
+  background-color: white;
+
+  border-radius: 20px;
   margin: 50px 0;
 
   display: flex;
   align-items: center;
+
+  box-shadow: 10px 5px 5px 	#c5c5c5;
+}
+
+.movie-card:hover {
+  cursor: pointer;
+  animation: zoom .1s linear forwards;
+}
+
+@keyframes zoom {
+  0% {
+    transform: scale(1.0);
+  }
+  100% {
+    transform: scale(1.01);
+  }
+}
+
+@keyframes zoom2 {
+  0% {
+    transform: scale(1.0);
+  }
+  100% {
+    transform: scale(1.08);
+  }
+}
+
+.create {
+  margin-top: 0;
 }
 
 .movie-card-image {
@@ -25,23 +110,249 @@
   width: 60%;
 }
 
-.cast-section {
-  background-color: #006E7F;
-  width: 30vw;
+.movie-page-info {
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+}
+
+.movie-banner {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+
+  width: 80vw;
+  height: 30vh;
+
+  background-color: #B22727;
+  box-shadow: 10px 5px 5px 	#c5c5c5;
+  border-radius: 10px;
+
+  margin: 30px 0;
+}
+
+.movie-page-info_image {
+  height: 200px;
+  width: auto;
+  border-radius: 5px;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+}
+
+.movie-image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cast-section,
+.guessList,
+.scoreboard {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  width: 325px;
+  min-height: 30vh;
+
+  background-color: #006E7F;
+  box-shadow: 10px 5px 5px 	#c5c5c5;
+  border-radius: 10px;
 }
 
 .guessList {
   background-color: #c47617;
-  width: 30vw;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+.scoreboard {
+  padding: 0 0 40px 0;
+}
+
+.cast,
+.character,
+.leader {
+  display: flex;
+  justify-content: space-around;
+
+  margin: 10px 0 0 0;
+
+  width: 25vw;
+  min-width: 250px;
+  max-width: 270px;
+
+  background-color: lightgray;
+  border-radius: 5px;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+}
+
+.leader {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  text-align: center;
+}
+
+.cast:hover,
+.character:hover,
+.cast-section:hover,
+.guessList:hover,
+.add-list-section:hover,
+.leader:hover {
+    cursor: pointer;
+    animation: zoom .1s linear forwards;
+}
+
+
+.cast button:hover,
+.cast button:hover,
+.character button:hover,
+.remove-list:hover,
+.add-list:hover,
+input:hover  {
+  cursor: pointer;
+  animation: zoom2 .1s linear forwards;
+}
+
+.cast {
+  font-family: 'Permanent Marker', cursive;
+}
+
+
+.character-buttons,
+.cast-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cast-button-container {
+  display: flex;
+  align-items: center;
+}
+
+.cast button,
+.character button {
+  border: none;
+  height: 30px;
+  border-radius: 5px;
+  margin: 0 3px
+}
+
+.character button,
+.cast button {
+  margin: 3px;
+  height: 20px;
+}
+
+#delete {
+  height: 45px;
+  color: #B22727;
+}
+
+#delete:hover {
+  color: white;
+  background-color: #B22727;
+}
+
+.gonner-button {
+  background-color: #B22727;
+  color: white;
+  transform: scale(1.08);
+}
+
+.survivor-button {
+  background-color: #007f61;
+  color: white;
+  transform: scale(1.08);
+}
+
+.createList,
+.movie-banner-rapper {
+  display: flex;
+  justify-content: center;
+}
+
+.add-list-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  margin: 0 0 20px 0;
+
+  width: 75vw;
+  max-width: 690px;
+  
+  /* min-height: 10vh; */
+  
+  background-color: #F8CB2E;
+  box-shadow: 10px 5px 5px 	#c5c5c5;
+  border-radius: 5px;
+}
+.add-list {
+  border: none;
+  height: 30px;
+  width: 50px;
+  border-radius: 5px;
+  margin: 30px 0
+}
+
+.guess-list-section {
+  padding: .5em 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 320px);
+  grid-gap: 2.5em;
+  justify-content: center;
+}
+
+.cast-score-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+
+.cast-score{
+  display: flex;
+}
+
+@media only screen and (max-width: 695px) {
+  .cast-score {
+    flex-direction: column;
+  }
+}
+.cast-section,
+.scoreboard {
+  margin: 20px
+}
+
+
+
 .character {
   display: flex;
   flex-direction: row;
+}
+
+.remove-list {
+  border: none;
+  height: 30px;
+  width: 100px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  margin: 20px;
+}
+
+input {
+  margin: 10px;
+  padding:10px;
+  border:0;
+  border-radius: 5px;
+  background-color: lightgray;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+}
+
+#create-movie-button {
+  margin: 10px;
+  padding:10px;
+  border:0;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
 }
