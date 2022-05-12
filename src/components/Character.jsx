@@ -18,7 +18,6 @@ const Character = (props) => {
       <h4>{props.order}</h4>
       <h4>{props.name}</h4>
       <div className="character-buttons">
-
         <button onClick={!clickedSurvivor ? () => (props.handleGonner(props.id), gonnerClicked()) : null} className={ clickedGonner ? 'gonner-button' : null}>Gonner</button>
         <button onClick={!clickedGonner ? () => survivorClicked() : null} className={ clickedSurvivor ? 'survivor-button' : null}>Survivor</button>
       </div>

@@ -195,38 +195,39 @@ const Movie = (props) => {
           <div className="movie-banner-rapper">
             <MovieBanner movieDetails={props.movieDetails} />
           </div>
-          <div className="cast-score">
-            <div className="cast-section">
-              <h2>Cast</h2>
-              {props.movieCast.map((char) => (
-                <Cast
-                  key={char.id}
-                  char={char}
-                  handleDeath={handleDeath}
-                  deleteCastMember={props.deleteCastMember}
-                  movieId={movieId}
-                  handleLived={handleLived}
-                  allGuessLists={allGuessLists}
-                />
-              ))}
-              <div>
-                <input
-                  name="name"
-                  type="text"
-                  placeholder="Cast Member"
-                  value={props.castForm.name}
-                  onChange={props.handleCastChange}
-                />
-                <button
-                  className="add-list"
-                  onClick={() => handleCastSubmit(movieId)}
-                >
-                  Add
-                </button>
+          <div className="cast-score-wrapper">
+            <div className="cast-score">
+              <div className="cast-section">
+                <h2>Cast</h2>
+                {props.movieCast.map((char) => (
+                  <Cast
+                    key={char.id}
+                    char={char}
+                    handleDeath={handleDeath}
+                    deleteCastMember={props.deleteCastMember}
+                    movieId={movieId}
+                    handleLived={handleLived}
+                    allGuessLists={allGuessLists}
+                  />
+                ))}
+                <div>
+                  <input
+                    name="name"
+                    type="text"
+                    placeholder="Cast Member"
+                    value={props.castForm.name}
+                    onChange={props.handleCastChange}
+                  />
+                  <button
+                    className="add-list"
+                    onClick={() => handleCastSubmit(movieId)}
+                  >
+                    Add
+                  </button>
+                </div>
               </div>
+              <Scoreboard sortedLeaders={sortedLeaders} />
             </div>
-
-            <Scoreboard sortedLeaders={sortedLeaders} />
           </div>
           <div className="createList">
             <CreateNewList

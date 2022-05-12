@@ -178,8 +178,8 @@
   margin: 10px 0 0 0;
 
   width: 25vw;
-  min-width: 200px;
-  max-width: 300px;
+  min-width: 250px;
+  max-width: 270px;
 
   background-color: lightgray;
   border-radius: 5px;
@@ -217,17 +217,18 @@ input:hover  {
   font-family: 'Permanent Marker', cursive;
 }
 
-.cast-buttons {
-  display: flex;
-  align-items: center;
-}
 
-.character-buttons {
+.character-buttons,
+.cast-buttons {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
+.cast-button-container {
+  display: flex;
+  align-items: center;
+}
 
 .cast button,
 .character button {
@@ -237,9 +238,20 @@ input:hover  {
   margin: 0 3px
 }
 
-.character button {
+.character button,
+.cast button {
   margin: 3px;
   height: 20px;
+}
+
+#delete {
+  height: 45px;
+  color: #B22727;
+}
+
+#delete:hover {
+  color: white;
+  background-color: #B22727;
 }
 
 .gonner-button {
@@ -265,10 +277,10 @@ input:hover  {
   flex-direction: column;
   align-items: center;
   
-  margin: 40px 0 20px 0;
+  margin: 0 0 20px 0;
 
-  width: 50vw;
-  max-width: 500px;
+  width: 75vw;
+  max-width: 690px;
   
   /* min-height: 10vh; */
   
@@ -284,13 +296,32 @@ input:hover  {
   margin: 30px 0
 }
 
-.guess-list-section,
-.cast-score {
-  padding: 2.5em 0;
+.guess-list-section {
+  padding: .5em 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, 320px);
   grid-gap: 2.5em;
   justify-content: center;
+}
+
+.cast-score-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+
+.cast-score{
+  display: flex;
+}
+
+@media only screen and (max-width: 695px) {
+  .cast-score {
+    flex-direction: column;
+  }
+}
+.cast-section,
+.scoreboard {
+  margin: 20px
 }
 
 
