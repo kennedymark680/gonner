@@ -208,6 +208,13 @@
 
 .landing-buttons button {
   margin: 20px;
+  height: 30px;
+  width: 100px;
+
+  border: 2px #B22727 solid;
+  border-radius: 5px;
+  background-color: #b2272722;
+  color: #701919;
 }
 
 .cast:hover,
@@ -226,10 +233,16 @@
 .character button:hover,
 .remove-list:hover,
 .add-list:hover,
-.landing-buttons:hover,
+.landing-buttons button:hover,
 input:hover  {
   cursor: pointer;
   animation: zoom2 .1s linear forwards;
+}
+
+.landing-buttons button:hover {
+  background-color: #B22727;
+  color: white;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.2);
 }
 
 .cast {
