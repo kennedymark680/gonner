@@ -11,7 +11,7 @@ const Movie = (props) => {
   // -------- VARIABLES --------------
 
   const { movieId } = useParams()
-  const apiUrl = 'http://localhost:3001'
+  const apiUrl = 'https://gonner-backend.herokuapp.com'
 
   // ----------- STATE -----------------
 

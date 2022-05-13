@@ -13,7 +13,7 @@ import Landing from './pages/Landing'
 function App() {
   let navigate = useNavigate()
 
-  const apiUrl = 'http://localhost:3001'
+  const apiUrl = 'https://gonner-backend.herokuapp.com'
 
   // ------- STATE LIVE HERE -----------
 

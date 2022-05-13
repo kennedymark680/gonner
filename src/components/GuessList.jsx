@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useState, useEffect }  from 'react'
 
 const GuessList = (props) => {
-  const apiUrl = 'http://localhost:3001'
+  const apiUrl = 'https://gonner-backend.herokuapp.com'
 
   // might not need this anymore 
   const [character, setCharacter] = useState('')
