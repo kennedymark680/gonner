@@ -1,14 +1,7 @@
 const MovieCard = (props) => {
   return (
-    <div className="movie-card">
-        <div className="movie-card-image">
-          <img src={props.image} alt='poster' />
-        </div>
-        <div className="movie-card-text">
-          <h1>{props.name}</h1>
-          <div>{props.description}</div>
-          <button onClick={() => props.playMovie(props.id)}>Play!</button>
-        </div>
+    <div className="movie-card" onClick={() => props.playMovie(props.id)} >
+        <img className="movie-card-image" src={`${props.image}`}/>
       </div>
   )
 }

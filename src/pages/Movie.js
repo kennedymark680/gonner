@@ -18,7 +18,7 @@ const Movie = (props) => {
   const [sortedLeaders, setSortedLeaders] = useState([])
   const [allGuessLists, setAllGuessLists] = useState([])
   const [guessListName, setGuessListName] = useState({
-    name: props.user ? `${props.user.username}` : '',
+    name: '',
     score: 0,
     gonnerOrder: 1
   })
@@ -45,9 +45,9 @@ const Movie = (props) => {
       )
       const difference = Math.abs(selectedCast.order - foundChar[0].order)
       let score = 0
-      if (difference === 0) {
+      if (difference === 0 && !foundChar[0].alive) {
         score = 3
-      } else if (difference === 1) {
+      } else if (difference === 1 && !foundChar[0].alive) {
         score = 1
       }
       const newGuessList = await axios.put(

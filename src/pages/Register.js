@@ -68,7 +68,7 @@ const Register = (props) => {
   return (
     <div className="register col">
       <div className="card-overlay centered">
-        <h1>Register!</h1>
+        <h1>Register</h1>
         <form className="forms" onSubmit={handleSubmit}>
           <div className="input-wrapper">
             <input
@@ -111,7 +111,7 @@ const Register = (props) => {
             />
           </div>
           <button
-            className="glow-on-hover-register"
+            className="register-button"
             disabled={
               !formValues.username ||
               (!formValues.password &&

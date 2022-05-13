@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Jura:wght@700&family=Nunito:wght@700&family=Permanent+Marker&family=Roboto+Mono:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@700&family=Nunito:wght@700&family=Permanent+Marker&family=Roboto+Mono:ital@1&family=Rubik+Mono+One&display=swap');
 * {
   margin: none;
   padding: none;
@@ -8,23 +8,58 @@
   font-family: 'Nunito', sans-serif;
 }
 
-.gonner-logo {
-  background-image: url("https://i.ibb.co/T4H2pj2/Screen-Shot-2022-05-04-at-10-13-34-PM.png");
-  width: 90vw;
-  height: 40vh;
-  background-size: cover;
+body {
+  background-color: #E2E2E2;
 }
 
-.register {
+.landing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.gonner-logo {
+  width: 80vw;
+  max-width: 750px;
+  height: auto;
+  margin: 15vh 0 0 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.landing h4 {
+  color: #B22727;
+  margin: 100px 0 50px 0;
+  width: 50vw;
+  font-family: 'Rubik Mono One', sans-serif;
+  text-align: center;
+}
+
+.login-forms {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 0 0 30px 0;
+}
+
+.register,
+.login-page {
   display: flex;
   flex-direction: column;
   align-items: center;
 
   width: 300px;
+  margin: 20px;
 
-  background-color: aliceblue;
+  color: #B22727;
+  background-color: #b2272722;
   box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
   border-radius: 5px;
+
+  font-family: 'Rubik Mono One', sans-serif;
+  
 }
 
 .register h1 {
@@ -42,35 +77,85 @@
 }
 
 .homePage {
-  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   min-height: 100vh;
+}
 
+.home-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 90vw;
+  /* min-width: 690px; */
+  height: 30vh;
+  min-height: 300px;
+
+  max-width: 1175px;
+  background-color: #B22727;
+  box-shadow: 10px 5px 5px 	#c5c5c5;
+  border-radius: 5px;
+
+  margin: 30px 0 0 0;
+}
+
+
+
+.banner-text {
+  align-self: flex-start;
+  color: white;
+  margin: 15px 0 0 30px;
+}
+
+.gonner-logo-home {
+  width: 80vw;
+  max-width: 400px;
+  height: auto;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 50px 0 0 0;
+}
+
+.create-movie {
+  margin: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+.movie-list {
+  padding: 1.5em 0;
+  display: flex;
+  flex-wrap: wrap;
+  grid-gap: 1.5em 2em;
+  justify-content: center;
+}
+
 .movie-card {
-  height: 300px;
-  width: 70vw;
-  max-width: 700px;
-  min-width: 550px;
+  width: 325px;
+  height: 500px;
 
-  background-color: white;
+  background-color: #F8F8F8;
 
-  border-radius: 20px;
-  margin: 50px 0;
+  border-radius: 5px;
 
   display: flex;
   align-items: center;
+  justify-content: center;
 
   box-shadow: 10px 5px 5px 	#c5c5c5;
 }
 
-.movie-card:hover {
+
+.movie-card:hover,
+.home-banner:hover,
+.add-movie-section:hover {
   cursor: pointer;
   animation: zoom .1s linear forwards;
 }
+
 
 @keyframes zoom {
   0% {
@@ -95,10 +180,13 @@
 }
 
 .movie-card-image {
-  height: 80%;
-  width: 40%;
-  border-radius: 10px;
+  height: 420px;
+  width: auto;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: 5px;
   overflow: hidden;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.2);
   
 }
 
@@ -110,38 +198,61 @@
   width: 60%;
 }
 
-.movie-page-info {
-  /* display: flex;
+.movie-page {
+  display: flex;
   flex-direction: column;
-  align-items: center; */
+  align-items: center;
 }
 
 .movie-banner {
   display: grid;
   grid-template-columns: 1fr 2fr;
 
-  width: 80vw;
-  height: 30vh;
+  width: 690px;
+  height: 300px;
 
-  background-color: #B22727;
+  background-color: #F8F8F8;
   box-shadow: 10px 5px 5px 	#c5c5c5;
-  border-radius: 10px;
+  border-radius: 5px;
 
-  margin: 30px 0;
+  margin: 30px 0 0 0;
+}
+
+.movie-banner h1 {
+  color: #B22727;
+  font-size: 2.5em;
 }
 
 .movie-page-info_image {
-  height: 200px;
+  height: 250px;
   width: auto;
   border-radius: 5px;
   box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
 }
+
+.movie-page-info_text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 20px 0 0 ;
+}
+
+
 
 .movie-image-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
+footer {
+  height: 2.5rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+/* ------ Movie Page -------- */
 
 .cast-section,
 .guessList,
@@ -153,16 +264,36 @@
   width: 325px;
   min-height: 30vh;
 
-  background-color: #006E7F;
-  box-shadow: 10px 5px 5px 	#c5c5c5;
-  border-radius: 10px;
+  background-color: #B22727;
+  box-shadow: 10px 5px 5px 	#D8DADB;
+  border-radius: 5px;
+}
+
+.movie-page-info_text h1,
+.cast-section h2,
+.scoreboard h2,
+.guessList h2,
+.guessList h3,
+.banner-text {
+  font-family: 'Rubik Mono One', sans-serif;
+}
+
+.cast-section h2,
+.scoreboard h2 {
+  color: white;
+  font-size: 2em;
+}
+
+.guessList h4 {
+  color: black;
 }
 
 .guessList {
-  background-color: #c47617;
+  background-color: #787C85;
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: white;
 }
 
 .scoreboard {
@@ -181,7 +312,7 @@
   min-width: 250px;
   max-width: 270px;
 
-  background-color: lightgray;
+  background-color: white;
   border-radius: 5px;
   box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
 }
@@ -192,15 +323,51 @@
   text-align: center;
 }
 
+.landing-buttons button,
+.register-button,
+.login-button,
+.add-movie-section button,
+.create-movie-button {
+  margin: 20px;
+  height: 30px;
+  width: 120px;
+
+  /* border: 2px #B22727 solid;
+  border-radius: 5px;
+  background-color: white; */
+  color: #B22727;
+  border-style: none;
+
+
+  font-family: 'Rubik Mono One', sans-serif;
+}
+
+.learn-to-play {
+  margin: 30px 60px 30px 0;
+  align-self: end;
+  color: white;
+  font-family: 'Rubik Mono One', sans-serif;
+}
+
+.register-button,
+.login-button {
+  background-color: #b2272700;
+}
+
 .cast:hover,
 .character:hover,
 .cast-section:hover,
 .guessList:hover,
 .add-list-section:hover,
+.movie-card-image:hover,
+.home-banner:hover,
 .leader:hover {
     cursor: pointer;
     animation: zoom .1s linear forwards;
+    
 }
+
+
 
 
 .cast button:hover,
@@ -208,12 +375,30 @@
 .character button:hover,
 .remove-list:hover,
 .add-list:hover,
+.landing-buttons button:hover,
+.register-button:hover,
+.login-button:hover,
+.create-movie-button:hover,
 input:hover  {
   cursor: pointer;
   animation: zoom2 .1s linear forwards;
 }
 
-.cast {
+.landing-buttons button:hover,
+.register-button:hover,
+.login-button:hover,
+.add-movie-section button:hover,
+.create-movie-button:hover {
+  background-color: #B22727;
+  color: white;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.2);
+}
+
+
+
+.cast,
+.character,
+.scoreboard h4 {
   font-family: 'Permanent Marker', cursive;
 }
 
@@ -272,22 +457,35 @@ input:hover  {
   justify-content: center;
 }
 
-.add-list-section {
+.add-list-section,
+.add-movie-section {
   display: flex;
   flex-direction: column;
   align-items: center;
   
-  margin: 0 0 20px 0;
+  margin: 0 0 12px 0;
 
-  width: 75vw;
-  max-width: 690px;
+  width: 690px;
   
-  /* min-height: 10vh; */
   
-  background-color: #F8CB2E;
+  background-color: #D8DADB;
   box-shadow: 10px 5px 5px 	#c5c5c5;
   border-radius: 5px;
 }
+
+.add-list-section {
+  background-color: #F8F8F8;
+}
+
+.add-movie-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60px;
+  margin: 20px 0 0 0;
+  background-color: #F8F8F8;
+}
+
 .add-list {
   border: none;
   height: 30px;
@@ -298,10 +496,11 @@ input:hover  {
 
 .guess-list-section {
   padding: .5em 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 320px);
+  display: flex;
+  flex-wrap: wrap;
   grid-gap: 2.5em;
   justify-content: center;
+  max-width: 730px;
 }
 
 .cast-score-wrapper {
@@ -318,13 +517,35 @@ input:hover  {
   .cast-score {
     flex-direction: column;
   }
+
+  .add-list-section {
+    width: 320px;
+  }
+
+  .home-banner {
+    width: 325px;
+  }
+
+  .movie-banner {
+    width: 320px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+
+  }
 }
 .cast-section,
 .scoreboard {
   margin: 20px
 }
 
-
+@media only screen and (max-width: 1050px) {
+  .home-banner {
+    width: 80vw;
+    max-width: 850px;
+  }
+}
 
 .character {
   display: flex;
@@ -346,7 +567,7 @@ input {
   padding:10px;
   border:0;
   border-radius: 5px;
-  background-color: lightgray;
+  background-color: white;
   box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
 }
 
