@@ -8,7 +8,7 @@ const Scoreboard = ({sortedLeaders}) => {
     <div className="scoreboard">
       <h2>Scoreboard</h2>
       {sortedLeaders.map((list) => (
-        <Leader list={list}/>
+        <Leader key={list.id} list={list}/>
       )
       )}
     </div>

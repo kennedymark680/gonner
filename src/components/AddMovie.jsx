@@ -1,7 +1,7 @@
 const AddMovie = ({clickAddMovie}) => {
   return (
     <div className="add-movie-section">
-      <button onClick={() => clickAddMovie()}>Add a Movie</button>
+      <button onClick={() => clickAddMovie()}>Add Movie</button>
     </div>
   )
 }

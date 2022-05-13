@@ -91,7 +91,7 @@ body {
   width: 90vw;
   /* min-width: 690px; */
   height: 30vh;
-  min-height: 300px;
+  min-height: 350px;
 
   max-width: 1175px;
   background-color: #B22727;
@@ -522,7 +522,8 @@ input:hover  {
     width: 320px;
   }
 
-  .home-banner {
+  .home-banner,
+  .add-movie-section {
     width: 325px;
   }
 
