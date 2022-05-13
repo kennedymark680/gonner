@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Jura:wght@700&family=Nunito:wght@700&family=Permanent+Marker&family=Roboto+Mono:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@700&family=Nunito:wght@700&family=Permanent+Marker&family=Roboto+Mono:ital@1&family=Rubik+Mono+One&display=swap');
 * {
   margin: none;
   padding: none;
@@ -18,13 +18,22 @@ body {
   align-items: center;
 }
 
+
 .gonner-logo {
   width: 80vw;
   max-width: 750px;
   height: auto;
-  margin: 10vh 0 0 0;
+  margin: 15vh 0 0 0;
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+.landing h4 {
+  color: #B22727;
+  margin: 100px 0 50px 0;
+  width: 50vw;
+  font-family: 'Rubik Mono One', sans-serif;
+  text-align: center;
 }
 
 .login-forms {
@@ -76,11 +85,13 @@ body {
   flex-direction: column;
   align-items: center;
 
-  width: 80vw;
+  width: 90vw;
+  /* min-width: 690px; */
   height: 30vh;
+  min-height: 300px;
 
-  max-width: 690px;
-  background-color: #F8F8F8;
+  max-width: 1175px;
+  background-color: #B22727;
   box-shadow: 10px 5px 5px 	#c5c5c5;
   border-radius: 5px;
 
@@ -91,7 +102,7 @@ body {
 
 .banner-text {
   align-self: flex-start;
-  color: #AA0200;
+  color: white;
   margin: 15px 0 0 30px;
 }
 
@@ -140,16 +151,8 @@ body {
 .add-movie-section:hover {
   cursor: pointer;
   animation: zoom .1s linear forwards;
-  /* border: 2px #B22727 solid; */
 }
 
-
-/* .add-movie-section:hover {
-  background-color: #AA0200;
-  cursor: pointer;
-  animation: zoom .1s linear forwards;
-
-} */
 
 @keyframes zoom {
   0% {
@@ -202,12 +205,10 @@ body {
   display: grid;
   grid-template-columns: 1fr 2fr;
 
-  width: 80vw;
-  height: 30vh;
+  width: 690px;
+  height: 300px;
 
-  max-width: 690px;
-
-  background-color: #F7F7F7;
+  background-color: #F8F8F8;
   box-shadow: 10px 5px 5px 	#c5c5c5;
   border-radius: 5px;
 
@@ -232,6 +233,7 @@ body {
   align-items: center;
   margin: 0 20px 0 0 ;
 }
+
 
 
 .movie-image-wrapper {
@@ -260,8 +262,17 @@ footer {
   min-height: 30vh;
 
   background-color: #B22727;
-  box-shadow: 10px 5px 5px 	#c5c5c5;
+  box-shadow: 10px 5px 5px 	#D8DADB;
   border-radius: 5px;
+}
+
+.movie-page-info_text h1,
+.cast-section h2,
+.scoreboard h2,
+.guessList h2,
+.guessList h3,
+.banner-text {
+  font-family: 'Rubik Mono One', sans-serif;
 }
 
 .cast-section h2,
@@ -270,11 +281,16 @@ footer {
   font-size: 2em;
 }
 
+.guessList h4 {
+  color: black;
+}
+
 .guessList {
-  background-color: #D4D4D4;
+  background-color: #787C85;
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: white;
 }
 
 .scoreboard {
@@ -318,6 +334,7 @@ footer {
   border-radius: 5px;
   background-color: white;
   color: #701919;
+
 }
 
 .learn-to-play {
@@ -375,7 +392,9 @@ input:hover  {
 
 
 
-.cast {
+.cast,
+.character,
+.scoreboard h4 {
   font-family: 'Permanent Marker', cursive;
 }
 
@@ -442,14 +461,16 @@ input:hover  {
   
   margin: 0 0 12px 0;
 
-  width: 75vw;
-  max-width: 690px;
+  width: 690px;
   
-  /* min-height: 10vh; */
   
-  background-color: #64635e;
+  background-color: #D8DADB;
   box-shadow: 10px 5px 5px 	#c5c5c5;
   border-radius: 5px;
+}
+
+.add-list-section {
+  background-color: #F8F8F8;
 }
 
 .add-movie-section {
@@ -497,14 +518,30 @@ input:hover  {
     width: 320px;
   }
 
-  
+  .home-banner {
+    width: 325px;
+  }
+
+  .movie-banner {
+    width: 320px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+
+  }
 }
 .cast-section,
 .scoreboard {
   margin: 20px
 }
 
-
+@media only screen and (max-width: 1050px) {
+  .home-banner {
+    width: 80vw;
+    max-width: 850px;
+  }
+}
 
 .character {
   display: flex;
