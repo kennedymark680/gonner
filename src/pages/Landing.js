@@ -23,7 +23,7 @@ const Landing = ({ setUser, toggleAuthenticated }) => {
       <img src={GonnerLogo} alt="gonnerLogo" className="gonner-logo" />
       <h4>
         The game where they die and you win. Watch a movie with friends, list
-        your predictions, earn points and WIN!
+        your predictions, earn points and compete!
       </h4>
       <div className="landing-buttons">
         <button onClick={() => toggleLogin()}>Login</button>

@@ -115,7 +115,7 @@ body {
   height: auto;
   background-size: contain;
   background-repeat: no-repeat;
-  margin: 30px 0 0 0;
+  margin: 50px 0 0 0;
 }
 
 .create-movie {
@@ -326,7 +326,6 @@ footer {
 .landing-buttons button,
 .register-button,
 .login-button,
-.learn-to-play,
 .add-movie-section button,
 .create-movie-button {
   margin: 20px;
@@ -344,9 +343,10 @@ footer {
 }
 
 .learn-to-play {
-  margin: 0 60px 30px 0;
+  margin: 30px 60px 30px 0;
   align-self: end;
-
+  color: white;
+  font-family: 'Rubik Mono One', sans-serif;
 }
 
 .register-button,
@@ -378,7 +378,6 @@ footer {
 .landing-buttons button:hover,
 .register-button:hover,
 .login-button:hover,
-.learn-to-play:hover,
 .create-movie-button:hover,
 input:hover  {
   cursor: pointer;
@@ -388,7 +387,6 @@ input:hover  {
 .landing-buttons button:hover,
 .register-button:hover,
 .login-button:hover,
-.learn-to-play:hover,
 .add-movie-section button:hover,
 .create-movie-button:hover {
   background-color: #B22727;

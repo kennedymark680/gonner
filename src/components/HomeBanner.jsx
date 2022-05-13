@@ -6,7 +6,7 @@ const HomeBanner = () => {
     <div className="home-banner">
       <div className='banner-text'>Guess who will be a ...</div>
       <img src={GonnerInverted} alt="gonnerLogo" className="gonner-logo-home" />
-      <button className='learn-to-play'>Learn to Play</button>
+      <div className='learn-to-play'>Learn to Play</div>
     </div>
   )
 }
