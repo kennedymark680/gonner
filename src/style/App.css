@@ -57,6 +57,9 @@ body {
   background-color: #b2272722;
   box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
   border-radius: 5px;
+
+  font-family: 'Rubik Mono One', sans-serif;
+  
 }
 
 .register h1 {
@@ -177,7 +180,7 @@ body {
 }
 
 .movie-card-image {
-  height: 390px;
+  height: 420px;
   width: auto;
   background-size: contain;
   background-repeat: no-repeat;
@@ -328,13 +331,16 @@ footer {
 .create-movie-button {
   margin: 20px;
   height: 30px;
-  width: 100px;
+  width: 120px;
 
-  border: 2px #B22727 solid;
+  /* border: 2px #B22727 solid;
   border-radius: 5px;
-  background-color: white;
-  color: #701919;
+  background-color: white; */
+  color: #B22727;
+  border-style: none;
 
+
+  font-family: 'Rubik Mono One', sans-serif;
 }
 
 .learn-to-play {
