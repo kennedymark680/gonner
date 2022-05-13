@@ -15,7 +15,7 @@ const Register = (props) => {
   const [emails, setEmails] = useState([])
 
   // Universal Axios call
-  let apiUrl = 'http://localhost:3001'
+  let apiUrl = 'https://gonner-backend.herokuapp.com'
 
   const getAllUsers = async () => {
     const response = await axios.get(`${apiUrl}/api/user`)

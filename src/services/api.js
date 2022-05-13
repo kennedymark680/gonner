@@ -1,7 +1,7 @@
 import Axios from 'axios'
 
 //Universal API call for the entire Auth on the app
-let apiUrl = 'http://localhost:3001'
+let apiUrl = 'https://gonner-backend.herokuapp.com'
 
 const Client = Axios.create({ baseURL: apiUrl })
 
