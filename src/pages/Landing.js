@@ -3,7 +3,7 @@ import Login from './Login'
 import Register from './Register'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import GonnerLogo from '../resources/gonner.png'
+import GonnerLogo from '../resources/gonnerTran.png'
 
 const Landing = ({ setUser, toggleAuthenticated }) => {
   let navigate = useNavigate()

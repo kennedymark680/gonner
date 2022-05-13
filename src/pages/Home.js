@@ -1,8 +1,16 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import MovieCard from '../components/MovieCard'
 import HomeBanner from '../components/HomeBanner'
+import AddMovie from '../components/AddMovie'
+import AddMovieForm from '../components/AddMovieForm'
 
 const Home = (props) => {
+  const [addMovie, toggleAddMovie] = useState(false)
+
+  const clickAddMovie = () => {
+    toggleAddMovie(!addMovie)
+  }
+
   useEffect(() => {
     props.getAllMovies()
   }, [])
@@ -10,6 +18,13 @@ const Home = (props) => {
   return (
     <div className="homePage">
       <HomeBanner />
+      <AddMovie clickAddMovie={clickAddMovie} />
+      {addMovie ? (
+        <AddMovieForm
+          handleMovieSubmit={props.handleMovieSubmit}
+          handleMovieChange={props.handleMovieChange}
+        />
+      ) : null}
       <div className="movie-list">
         {props.allMovies.map((movie) => (
           <MovieCard
@@ -22,35 +37,7 @@ const Home = (props) => {
           />
         ))}
       </div>
-      <div className="movie-card create">
-        <form className="create-movie" onSubmit={props.handleMovieSubmit}>
-          <div>
-            <input
-              name="name"
-              type="text"
-              placeholder="Movie Title"
-              onChange={props.handleMovieChange}
-            />
-          </div>
-          <div>
-            <input
-              name="description"
-              type="text"
-              placeholder="Short Description"
-              onChange={props.handleMovieChange}
-            />
-          </div>
-          <div>
-            <input
-              name="image"
-              type="text"
-              placeholder="Movie Poster"
-              onChange={props.handleMovieChange}
-            />
-          </div>
-          <button id="create-movie-button">Create Movie</button>
-        </form>
-      </div>
+      <footer></footer>
     </div>
   )
 }

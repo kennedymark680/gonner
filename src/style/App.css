@@ -8,6 +8,10 @@
   font-family: 'Nunito', sans-serif;
 }
 
+body {
+  background-color: #E2E2E2;
+}
+
 .landing {
   display: flex;
   flex-direction: column;
@@ -65,7 +69,6 @@
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  background-color: #AFD0DB;
 }
 
 .home-banner {
@@ -77,12 +80,14 @@
   height: 30vh;
 
   max-width: 690px;
-  background-color: white;
+  background-color: #F8F8F8;
   box-shadow: 10px 5px 5px 	#c5c5c5;
   border-radius: 5px;
 
   margin: 30px 0 0 0;
 }
+
+
 
 .banner-text {
   align-self: flex-start;
@@ -99,6 +104,13 @@
   margin: 30px 0 0 0;
 }
 
+.create-movie {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .movie-list {
   padding: 1.5em 0;
   display: flex;
@@ -111,7 +123,7 @@
   width: 325px;
   height: 500px;
 
-  background-color: white;
+  background-color: #F8F8F8;
 
   border-radius: 5px;
 
@@ -122,10 +134,22 @@
   box-shadow: 10px 5px 5px 	#c5c5c5;
 }
 
-.movie-card:hover {
+
+.movie-card:hover,
+.home-banner:hover,
+.add-movie-section:hover {
   cursor: pointer;
   animation: zoom .1s linear forwards;
+  /* border: 2px #B22727 solid; */
 }
+
+
+/* .add-movie-section:hover {
+  background-color: #AA0200;
+  cursor: pointer;
+  animation: zoom .1s linear forwards;
+
+} */
 
 @keyframes zoom {
   0% {
@@ -183,25 +207,47 @@
 
   max-width: 690px;
 
-  background-color: #2B3956;
+  background-color: #F7F7F7;
   box-shadow: 10px 5px 5px 	#c5c5c5;
   border-radius: 5px;
 
   margin: 30px 0 0 0;
 }
 
+.movie-banner h1 {
+  color: #B22727;
+  font-size: 2.5em;
+}
+
 .movie-page-info_image {
-  height: 200px;
+  height: 250px;
   width: auto;
   border-radius: 5px;
   box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
 }
+
+.movie-page-info_text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 20px 0 0 ;
+}
+
 
 .movie-image-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
+footer {
+  height: 2.5rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+/* ------ Movie Page -------- */
 
 .cast-section,
 .guessList,
@@ -213,13 +259,19 @@
   width: 325px;
   min-height: 30vh;
 
-  background-color: #4B7196;
+  background-color: #B22727;
   box-shadow: 10px 5px 5px 	#c5c5c5;
   border-radius: 5px;
 }
 
+.cast-section h2,
+.scoreboard h2 {
+  color: white;
+  font-size: 2em;
+}
+
 .guessList {
-  background-color: #AFD0DB;
+  background-color: #D4D4D4;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -241,7 +293,7 @@
   min-width: 250px;
   max-width: 270px;
 
-  background-color: lightgray;
+  background-color: white;
   border-radius: 5px;
   box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
 }
@@ -255,7 +307,9 @@
 .landing-buttons button,
 .register-button,
 .login-button,
-.learn-to-play {
+.learn-to-play,
+.add-movie-section button,
+.create-movie-button {
   margin: 20px;
   height: 30px;
   width: 100px;
@@ -283,10 +337,14 @@
 .guessList:hover,
 .add-list-section:hover,
 .movie-card-image:hover,
+.home-banner:hover,
 .leader:hover {
     cursor: pointer;
     animation: zoom .1s linear forwards;
+    
 }
+
+
 
 
 .cast button:hover,
@@ -298,6 +356,7 @@
 .register-button:hover,
 .login-button:hover,
 .learn-to-play:hover,
+.create-movie-button:hover,
 input:hover  {
   cursor: pointer;
   animation: zoom2 .1s linear forwards;
@@ -306,11 +365,15 @@ input:hover  {
 .landing-buttons button:hover,
 .register-button:hover,
 .login-button:hover,
-.learn-to-play:hover {
+.learn-to-play:hover,
+.add-movie-section button:hover,
+.create-movie-button:hover {
   background-color: #B22727;
   color: white;
   box-shadow:0 0 15px 4px rgba(0,0,0,0.2);
 }
+
+
 
 .cast {
   font-family: 'Permanent Marker', cursive;
@@ -371,7 +434,8 @@ input:hover  {
   justify-content: center;
 }
 
-.add-list-section {
+.add-list-section,
+.add-movie-section {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -383,10 +447,20 @@ input:hover  {
   
   /* min-height: 10vh; */
   
-  background-color: #E4EFF0;
+  background-color: #64635e;
   box-shadow: 10px 5px 5px 	#c5c5c5;
   border-radius: 5px;
 }
+
+.add-movie-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60px;
+  margin: 20px 0 0 0;
+  background-color: #F8F8F8;
+}
+
 .add-list {
   border: none;
   height: 30px;
