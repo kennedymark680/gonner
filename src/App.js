@@ -61,8 +61,10 @@ function App() {
   // ------- HANDLE SUBMITs ---------
 
   const handleMovieSubmit = async (e) => {
-    e.preventDefault()
+    // e.preventDefault()
     const res = await axios.post(`${apiUrl}/api/movie/create`, movieForm)
+    console.log(res.data)
+    navigate(`/movie/${res.data.id}`)
     getAllMovies()
   }
 
@@ -142,6 +144,7 @@ function App() {
               movieCast={movieCast}
               castForm={castForm}
               setCastForm={setCastForm}
+              setMovieForm={setMovieForm}
               // gonnerOrder={gonnerOrder}
               // increaseGonnerCount={increaseGonnerCount}
             />
@@ -166,6 +169,7 @@ function App() {
               handleMovieSubmit={handleMovieSubmit}
               handleMovieChange={handleMovieChange}
               playMovie={playMovie}
+              setMovieForm={setMovieForm}
             />
           }
         />

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import GuessList from '../components/GuessList'
 import Cast from '../components/Cast'
@@ -8,6 +8,8 @@ import MovieBanner from '../components/MovieBanner'
 import Scoreboard from '../components/Scoreboard'
 
 const Movie = (props) => {
+  let navigate = useNavigate()
+
   // -------- VARIABLES --------------
 
   const { movieId } = useParams()
@@ -241,6 +243,11 @@ const Movie = (props) => {
     setSortedLeaders(sortedLeaders)
   }
 
+  const deleteMovie = async () => {
+    let res = await axios.delete(`${apiUrl}/api/movie/${movieId}`)
+    navigate('/home')
+  }
+
   useEffect(() => {
     const interval = setInterval(() => {
       getAllGuessLists()
@@ -314,6 +321,7 @@ const Movie = (props) => {
               />
             ))}
           </div>
+          <button onClick={() => deleteMovie()}>Delete Movie</button>
         </div>
       ) : (
         <div>Loading...</div>

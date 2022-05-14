@@ -4,10 +4,13 @@ import HomeBanner from '../components/HomeBanner'
 import AddMovie from '../components/AddMovie'
 import AddMovieForm from '../components/AddMovieForm'
 import LearnToPlay from '../components/LearnToPlay'
+import SearchMovie from '../components/SearchMovie'
+import axios from 'axios'
 
 const Home = (props) => {
   const [addMovie, toggleAddMovie] = useState(false)
   const [learnToPlay, toggleLearnToPlay] = useState(false)
+  const [search, toggleSearch] = useState(false)
 
   const clickLearn = () => {
     toggleLearnToPlay(!learnToPlay)
@@ -17,6 +20,17 @@ const Home = (props) => {
     toggleAddMovie(!addMovie)
   }
 
+  const clickSearch = () => {
+    toggleSearch(!search)
+  }
+
+  const findMovie = async () => {
+    const res = await axios.get(
+      'https://api.themoviedb.org/3/search/movie?query=${jaws}&api_key=dd80d4093c52a1f44c0690a18568bd3b'
+    )
+    console.log(res.data.results)
+  }
+
   useEffect(() => {
     props.getAllMovies()
   }, [])
@@ -24,7 +38,13 @@ const Home = (props) => {
   return (
     <div className="homePage">
       <HomeBanner clickLearn={clickLearn} />
-      <AddMovie clickAddMovie={clickAddMovie} />
+      <AddMovie clickAddMovie={clickAddMovie} clickSearch={clickSearch} />
+      {search ? (
+        <SearchMovie
+          setMovieForm={props.setMovieForm}
+          handleMovieSubmit={props.handleMovieSubmit}
+        />
+      ) : null}
       {learnToPlay ? <LearnToPlay /> : null}
       {addMovie ? (
         <AddMovieForm
@@ -32,7 +52,7 @@ const Home = (props) => {
           handleMovieChange={props.handleMovieChange}
         />
       ) : null}
-      {!learnToPlay ? (
+      {!learnToPlay && !search ? (
         <div className="movie-list">
           {props.allMovies.map((movie) => (
             <MovieCard
