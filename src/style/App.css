@@ -118,6 +118,22 @@ body {
   margin: 50px 0 0 0;
 }
 
+.learn-to-play-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Rubik Mono One', sans-serif;
+  width: 50vw;
+  max-width: 700px;
+  color: #B22727;
+  margin: 40px 0 0 0;
+}
+
+.example-pix {
+  height: 500px;
+  width: auto;
+}
+
 .create-movie {
   margin: 20px;
   display: flex;
@@ -154,6 +170,10 @@ body {
 .add-movie-section:hover {
   cursor: pointer;
   animation: zoom .1s linear forwards;
+}
+
+.movie-card:hover {
+  background-color: #B22727;
 }
 
 
