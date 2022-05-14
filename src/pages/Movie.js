@@ -261,6 +261,9 @@ const Movie = (props) => {
     <div>
       {props.movieDetails ? (
         <div className="movie-page">
+          <button className="back-button" onClick={() => navigate('/home')}>
+            {'<'}
+          </button>
           <div className="movie-banner-rapper">
             <MovieBanner movieDetails={props.movieDetails} />
           </div>
@@ -321,7 +324,9 @@ const Movie = (props) => {
               />
             ))}
           </div>
-          <button onClick={() => deleteMovie()}>Delete Movie</button>
+          <button className="delete-movie" onClick={() => deleteMovie()}>
+            Delete Movie
+          </button>
         </div>
       ) : (
         <div>Loading...</div>

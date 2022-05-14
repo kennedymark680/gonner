@@ -354,10 +354,11 @@ footer {
 .register-button,
 .login-button,
 .add-movie-section button,
+.delete-movie,
 .create-movie-button {
   margin: 20px;
   height: 30px;
-  width: 120px;
+  width: 150px;
 
   /* border: 2px #B22727 solid;
   border-radius: 5px;
@@ -367,6 +368,15 @@ footer {
 
 
   font-family: 'Rubik Mono One', sans-serif;
+}
+
+.back-button {
+  color: #B22727;
+  border-style: none;
+  font-family: 'Rubik Mono One', sans-serif;
+  font-size: 1.5em;
+  align-self: flex-start;
+  margin: 10px 0 0 50px;
 }
 
 .learn-to-play {
@@ -388,6 +398,7 @@ footer {
 .add-list-section:hover,
 .movie-card-image:hover,
 .home-banner:hover,
+.scoreboard:hover,
 .leader:hover {
     cursor: pointer;
     animation: zoom .1s linear forwards;
@@ -406,6 +417,8 @@ footer {
 .register-button:hover,
 .login-button:hover,
 .create-movie-button:hover,
+.back-button:hover,
+.delete-movie:hover,
 input:hover  {
   cursor: pointer;
   animation: zoom2 .1s linear forwards;
@@ -415,6 +428,8 @@ input:hover  {
 .register-button:hover,
 .login-button:hover,
 .add-movie-section button:hover,
+.delete-movie:hover,
+.back-button:hover,
 .create-movie-button:hover {
   background-color: #B22727;
   color: white;
