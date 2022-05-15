@@ -26,7 +26,7 @@ const AddMovieForm = (props) => {
               onChange={props.handleMovieChange}
             />
           </div>
-          <button className="create-movie-button">Create</button>
+          <button className="white-red-button" onSubmit={() => props.handleMovieSubmit()}>Create</button>
         </form>
       </div>
   )

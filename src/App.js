@@ -62,8 +62,9 @@ function App() {
 
   const handleMovieSubmit = async (e) => {
     // e.preventDefault()
+    console.log(movieForm, 'movieForm')
     const res = await axios.post(`${apiUrl}/api/movie/create`, movieForm)
-    console.log(res.data)
+    console.log(res.data, 'res.data')
     navigate(`/movie/${res.data.id}`)
     getAllMovies()
   }

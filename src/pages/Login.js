@@ -47,7 +47,7 @@ const Login = ({ setUser, toggleAuthenticated }) => {
         </div>
         <div>
           <button
-            className="login-button"
+            className="white-red-button"
             onClick={handleSubmit}
             disabled={!formValues.username || !formValues.password}
           >

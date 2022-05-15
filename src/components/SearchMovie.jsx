@@ -37,7 +37,6 @@ const SearchMovie = (props) => {
         <button onClick={() => handleSubmit()}>Find</button>
       </div>
       <div className='movie-list'>
-
       {movies.map((movie) => (
         <MovieCard image={`${IMAGE_BASE_PATH}${movie.poster_path}`} search={search} movie={movie} 
         handleMovieSubmit={props.handleMovieSubmit}

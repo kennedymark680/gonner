@@ -261,7 +261,10 @@ const Movie = (props) => {
     <div>
       {props.movieDetails ? (
         <div className="movie-page">
-          <button className="back-button" onClick={() => navigate('/home')}>
+          <button
+            className="white-red-button back"
+            onClick={() => navigate('/home')}
+          >
             {'<'}
           </button>
           <div className="movie-banner-rapper">
@@ -324,7 +327,7 @@ const Movie = (props) => {
               />
             ))}
           </div>
-          <button className="delete-movie" onClick={() => deleteMovie()}>
+          <button className="white-red-button" onClick={() => deleteMovie()}>
             Delete Movie
           </button>
         </div>
