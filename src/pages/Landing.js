@@ -25,10 +25,16 @@ const Landing = ({ setUser, toggleAuthenticated }) => {
         The game where they die and you win. Watch a movie with friends, list
         your predictions, earn points and compete!
       </h4>
-      <div className="landing-buttons">
-        <button onClick={() => toggleLogin()}>Login</button>
-        <button onClick={() => toggleRegister()}>Register</button>
-        <button onClick={() => navigate('/home')}>Guest</button>
+      <div>
+        <button onClick={() => toggleLogin()} className="white-red-button">
+          Login
+        </button>
+        <button onClick={() => toggleRegister()} className="white-red-button">
+          Register
+        </button>
+        <button onClick={() => navigate('/home')} className="white-red-button">
+          Guest
+        </button>
       </div>
       {login ? (
         <Login setUser={setUser} toggleAuthenticated={toggleAuthenticated} />

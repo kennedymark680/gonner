@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import GuessList from '../components/GuessList'
 import Cast from '../components/Cast'
@@ -8,6 +8,8 @@ import MovieBanner from '../components/MovieBanner'
 import Scoreboard from '../components/Scoreboard'
 
 const Movie = (props) => {
+  let navigate = useNavigate()
+
   // -------- VARIABLES --------------
 
   const { movieId } = useParams()
@@ -33,7 +35,7 @@ const Movie = (props) => {
     props.setCastForm({
       name: '',
       alive: true,
-      order: 0
+      order: null
     })
     props.getCastByMovieId(movieId)
   }
@@ -60,6 +62,28 @@ const Movie = (props) => {
     getAllGuessLists()
   }
 
+  const updateScoreReverse = async (selectedCast, allGuessLists) => {
+    for (const list of allGuessLists) {
+      const foundChar = list.Characters.filter(
+        (char) => selectedCast.name === char.name
+      )
+      const difference = Math.abs(selectedCast.order - foundChar[0].order)
+      let score = 0
+      if (difference === 0 && !foundChar[0].alive) {
+        score = -3
+      } else if (difference === 1 && !foundChar[0].alive) {
+        score = -1
+      }
+      const newGuessList = await axios.put(
+        `${apiUrl}/api/guesslist/score/${list.id}`,
+        {
+          score: score
+        }
+      )
+    }
+    getAllGuessLists()
+  }
+
   const handleDeath = async (castmemberId) => {
     // Check if gonnerOrder isn't more than the number of cast members
     if (props.movieDetails.gonnerOrder <= props.movieCast.length) {
@@ -75,7 +99,7 @@ const Movie = (props) => {
 
       updateScore(selectedCast, allGuessLists)
 
-      // Increment and set the new movies gonner order
+      // Increase gonner order
       const newOrder = props.movieDetails.gonnerOrder + 1
       const resMovie = await axios.put(`${apiUrl}/api/movie/${movieId}`, {
         gonnerOrder: newOrder
@@ -84,7 +108,32 @@ const Movie = (props) => {
     }
   }
 
-  const handleLived = async (castMember, allGuessLists) => {
+  const handleDeathReverse = async (cast) => {
+    updateScoreReverse(cast, allGuessLists)
+    const newOrder = props.movieDetails.gonnerOrder - 1
+    const resMovie = await axios.put(`${apiUrl}/api/movie/${movieId}`, {
+      gonnerOrder: newOrder
+    })
+
+    let newCastOrder = null
+    if (newCastOrder === 1) {
+      newCastOrder = null
+    } else {
+      newCastOrder = cast.order - 1
+    }
+
+    const resCastMember = await axios.put(
+      `${apiUrl}/api/castmember/${cast.id}`,
+      {
+        alive: true,
+        order: null
+      }
+    )
+    let selectedCast = resCastMember.data[0]
+    props.getCastByMovieId(movieId)
+  }
+
+  const handleLived = async (castMember) => {
     for (const list of allGuessLists) {
       const foundChar = list.Characters.filter(
         (char) => castMember.name === char.name
@@ -93,6 +142,21 @@ const Movie = (props) => {
       if (foundChar[0].alive) {
         await axios.put(`${apiUrl}/api/guesslist/score/${list.id}`, {
           score: 3
+        })
+      }
+    }
+    getAllGuessLists()
+  }
+
+  const handleLivedReverse = async (castMember) => {
+    for (const list of allGuessLists) {
+      const foundChar = list.Characters.filter(
+        (char) => castMember.name === char.name
+      )
+
+      if (foundChar[0].alive) {
+        await axios.put(`${apiUrl}/api/guesslist/score/${list.id}`, {
+          score: -3
         })
       }
     }
@@ -116,7 +180,7 @@ const Movie = (props) => {
     for (let i = 0; i < props.movieCast.length; i++) {
       let character = {
         name: props.movieCast[i].name,
-        order: 0,
+        order: null,
         alive: true
       }
       createCharacters(res.data.id, character)
@@ -179,6 +243,11 @@ const Movie = (props) => {
     setSortedLeaders(sortedLeaders)
   }
 
+  const deleteMovie = async () => {
+    let res = await axios.delete(`${apiUrl}/api/movie/${movieId}`)
+    navigate('/home')
+  }
+
   useEffect(() => {
     const interval = setInterval(() => {
       getAllGuessLists()
@@ -192,6 +261,12 @@ const Movie = (props) => {
     <div>
       {props.movieDetails ? (
         <div className="movie-page">
+          <button
+            className="white-red-button back"
+            onClick={() => navigate('/home')}
+          >
+            {'<'}
+          </button>
           <div className="movie-banner-rapper">
             <MovieBanner movieDetails={props.movieDetails} />
           </div>
@@ -208,6 +283,8 @@ const Movie = (props) => {
                     movieId={movieId}
                     handleLived={handleLived}
                     allGuessLists={allGuessLists}
+                    handleDeathReverse={handleDeathReverse}
+                    handleLivedReverse={handleLivedReverse}
                   />
                 ))}
                 <div>
@@ -250,6 +327,9 @@ const Movie = (props) => {
               />
             ))}
           </div>
+          <button className="white-red-button" onClick={() => deleteMovie()}>
+            Delete Movie
+          </button>
         </div>
       ) : (
         <div>Loading...</div>

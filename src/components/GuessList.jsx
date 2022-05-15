@@ -28,7 +28,15 @@ const GuessList = (props) => {
     
     let newGonnerOrder = props.gonnerOrder + 1
     const resGuessList = await axios.put(`${apiUrl}/api/guesslist/${props.id}`, { gonnerOrder: newGonnerOrder})
+    getCharactersByListId()
+  }
 
+  const handleGonnerReverse = async (char) => {
+    let newGonnerOrder = props.gonnerOrder - 1
+    const resGuessList = await axios.put(`${apiUrl}/api/guesslist/${props.id}`, { gonnerOrder: newGonnerOrder})
+
+    let newCharOrder = char.order - 1
+    const resCharacter = await axios.put(`${apiUrl}/api/character/${char.id}`, { order: null, alive: true})
     getCharactersByListId()
   }
 
@@ -58,7 +66,7 @@ const GuessList = (props) => {
         <h3>Score: {props.score}</h3>
         {characters.map((char) => (
           <div>
-            <Character key={char.id} name={char.name} id={char.id} order={char.order} handleGonner={handleGonner}/>
+            <Character key={char.name} name={char.name} id={char.id} order={char.order} char={char} handleGonner={handleGonner} handleGonnerReverse={handleGonnerReverse}/>
           </div>
         ))}
         <button className='remove-list' onClick={() => deleteList()}>Remove List</button>

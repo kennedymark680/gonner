@@ -118,11 +118,34 @@ body {
   margin: 50px 0 0 0;
 }
 
+.learn-to-play-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Rubik Mono One', sans-serif;
+  width: 50vw;
+  max-width: 700px;
+  color: #B22727;
+  margin: 40px 0 0 0;
+}
+
+.example-pix {
+  height: 500px;
+  width: auto;
+}
+
 .create-movie {
   margin: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.search-movie-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px 0 0 0;
 }
 
 .movie-list {
@@ -154,6 +177,10 @@ body {
 .add-movie-section:hover {
   cursor: pointer;
   animation: zoom .1s linear forwards;
+}
+
+.movie-card:hover {
+  background-color: #B22727;
 }
 
 
@@ -323,23 +350,29 @@ footer {
   text-align: center;
 }
 
-.landing-buttons button,
-.register-button,
-.login-button,
-.add-movie-section button,
-.create-movie-button {
+.white-red-button {
   margin: 20px;
   height: 30px;
-  width: 120px;
+  width: 150px;
 
-  /* border: 2px #B22727 solid;
-  border-radius: 5px;
-  background-color: white; */
   color: #B22727;
   border-style: none;
 
-
   font-family: 'Rubik Mono One', sans-serif;
+}
+
+.white-red-button:hover {
+  background-color: #B22727;
+  color: white;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.2);
+  cursor: pointer;
+  animation: zoom2 .1s linear forwards;
+}
+
+.back {
+  font-size: 1.5em;
+  align-self: flex-start;
+  margin: 10px 0 0 50px;
 }
 
 .learn-to-play {
@@ -361,6 +394,7 @@ footer {
 .add-list-section:hover,
 .movie-card-image:hover,
 .home-banner:hover,
+.scoreboard:hover,
 .leader:hover {
     cursor: pointer;
     animation: zoom .1s linear forwards;
@@ -375,25 +409,10 @@ footer {
 .character button:hover,
 .remove-list:hover,
 .add-list:hover,
-.landing-buttons button:hover,
-.register-button:hover,
-.login-button:hover,
-.create-movie-button:hover,
 input:hover  {
   cursor: pointer;
   animation: zoom2 .1s linear forwards;
 }
-
-.landing-buttons button:hover,
-.register-button:hover,
-.login-button:hover,
-.add-movie-section button:hover,
-.create-movie-button:hover {
-  background-color: #B22727;
-  color: white;
-  box-shadow:0 0 15px 4px rgba(0,0,0,0.2);
-}
-
 
 
 .cast,
@@ -479,6 +498,7 @@ input:hover  {
 
 .add-movie-section {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   min-height: 60px;
