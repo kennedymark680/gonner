@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react'
 import { RegisterUser } from '../services/Auth'
-import { useNavigate } from 'react-router-dom'
+import { BACKEND } from '../globals'
+
 import axios from 'axios'
 
 const Register = (props) => {
-  let navigate = useNavigate()
-
   const [formValues, setFormValues] = useState({
     username: '',
     password: '',
@@ -14,11 +13,8 @@ const Register = (props) => {
   const [usernames, setUsernames] = useState([])
   const [emails, setEmails] = useState([])
 
-  // Universal Axios call
-  let apiUrl = 'https://gonner-backend.herokuapp.com'
-
   const getAllUsers = async () => {
-    const response = await axios.get(`${apiUrl}/api/user`)
+    const response = await axios.get(`${BACKEND}/api/user`)
     let loadUsernames = []
     let loadEmails = []
 

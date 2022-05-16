@@ -1,12 +1,11 @@
 import { useState } from 'react'
 import axios from 'axios'
 import MovieCard from './MovieCard'
+import { BASE_URL, POSTER_PATH } from '../globals'
 
 const SearchMovie = (props) => {
 
-  const API_KEY = 'dd80d4093c52a1f44c0690a18568bd3b'
-  const DOMAIN = 'https://api.themoviedb.org/3'
-  const IMAGE_BASE_PATH = 'https://image.tmdb.org/t/p/original' 
+  let API_KEY = process.env.REACT_APP_TMDB_KEY
 
   const [formValue, setFormValue] = useState('')
   const [movies, setMovies] = useState([])
@@ -18,11 +17,10 @@ const SearchMovie = (props) => {
 
   const handleSubmit = async () => {
     const res = await axios.get(
-      `https://api.themoviedb.org/3/search/movie?query=${formValue}&api_key=dd80d4093c52a1f44c0690a18568bd3b`
+      `${BASE_URL}/search/movie?query=${formValue}&api_key=${API_KEY}`
     )
     setMovies(res.data.results)
     setFormValue('')
-    console.log(res.data.results)
   }
 
   return (
@@ -38,7 +36,7 @@ const SearchMovie = (props) => {
       </div>
       <div className='movie-list'>
       {movies.map((movie) => (
-        <MovieCard image={`${IMAGE_BASE_PATH}${movie.poster_path}`} search={search} movie={movie} 
+        <MovieCard key={movie.id} image={`${POSTER_PATH}${movie.poster_path}`} search={search} movie={movie} 
         handleMovieSubmit={props.handleMovieSubmit}
         setMovieForm={props.setMovieForm}/>
         ))}

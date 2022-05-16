@@ -5,7 +5,6 @@ import AddMovie from '../components/AddMovie'
 import AddMovieForm from '../components/AddMovieForm'
 import LearnToPlay from '../components/LearnToPlay'
 import SearchMovie from '../components/SearchMovie'
-import axios from 'axios'
 
 const Home = (props) => {
   const [addMovie, toggleAddMovie] = useState(false)
@@ -22,13 +21,6 @@ const Home = (props) => {
 
   const clickSearch = () => {
     toggleSearch(!search)
-  }
-
-  const findMovie = async () => {
-    const res = await axios.get(
-      'https://api.themoviedb.org/3/search/movie?query=${jaws}&api_key=dd80d4093c52a1f44c0690a18568bd3b'
-    )
-    console.log(res.data.results)
   }
 
   useEffect(() => {

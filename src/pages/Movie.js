@@ -6,6 +6,7 @@ import Cast from '../components/Cast'
 import CreateNewList from '../components/CreateNewList'
 import MovieBanner from '../components/MovieBanner'
 import Scoreboard from '../components/Scoreboard'
+import { BACKEND } from '../globals'
 
 const Movie = (props) => {
   let navigate = useNavigate()
@@ -13,7 +14,6 @@ const Movie = (props) => {
   // -------- VARIABLES --------------
 
   const { movieId } = useParams()
-  const apiUrl = 'https://gonner-backend.herokuapp.com'
 
   // ----------- STATE -----------------
 
@@ -29,7 +29,7 @@ const Movie = (props) => {
 
   const handleCastSubmit = async () => {
     const res = await axios.post(
-      `${apiUrl}/api/castmember/${movieId}`,
+      `${BACKEND}/api/castmember/${movieId}`,
       props.castForm
     )
     props.setCastForm({
@@ -53,7 +53,7 @@ const Movie = (props) => {
         score = 1
       }
       const newGuessList = await axios.put(
-        `${apiUrl}/api/guesslist/score/${list.id}`,
+        `${BACKEND}/api/guesslist/score/${list.id}`,
         {
           score: score
         }
@@ -75,7 +75,7 @@ const Movie = (props) => {
         score = -1
       }
       const newGuessList = await axios.put(
-        `${apiUrl}/api/guesslist/score/${list.id}`,
+        `${BACKEND}/api/guesslist/score/${list.id}`,
         {
           score: score
         }
@@ -89,7 +89,7 @@ const Movie = (props) => {
     if (props.movieDetails.gonnerOrder <= props.movieCast.length) {
       // Set Cast Members gonner order
       const resCastMember = await axios.put(
-        `${apiUrl}/api/castmember/${castmemberId}`,
+        `${BACKEND}/api/castmember/${castmemberId}`,
         {
           alive: false,
           order: props.movieDetails.gonnerOrder
@@ -101,7 +101,7 @@ const Movie = (props) => {
 
       // Increase gonner order
       const newOrder = props.movieDetails.gonnerOrder + 1
-      const resMovie = await axios.put(`${apiUrl}/api/movie/${movieId}`, {
+      const resMovie = await axios.put(`${BACKEND}/api/movie/${movieId}`, {
         gonnerOrder: newOrder
       })
       props.getCastByMovieId(movieId)
@@ -111,7 +111,7 @@ const Movie = (props) => {
   const handleDeathReverse = async (cast) => {
     updateScoreReverse(cast, allGuessLists)
     const newOrder = props.movieDetails.gonnerOrder - 1
-    const resMovie = await axios.put(`${apiUrl}/api/movie/${movieId}`, {
+    const resMovie = await axios.put(`${BACKEND}/api/movie/${movieId}`, {
       gonnerOrder: newOrder
     })
 
@@ -123,7 +123,7 @@ const Movie = (props) => {
     }
 
     const resCastMember = await axios.put(
-      `${apiUrl}/api/castmember/${cast.id}`,
+      `${BACKEND}/api/castmember/${cast.id}`,
       {
         alive: true,
         order: null
@@ -140,7 +140,7 @@ const Movie = (props) => {
       )
 
       if (foundChar[0].alive) {
-        await axios.put(`${apiUrl}/api/guesslist/score/${list.id}`, {
+        await axios.put(`${BACKEND}/api/guesslist/score/${list.id}`, {
           score: 3
         })
       }
@@ -155,7 +155,7 @@ const Movie = (props) => {
       )
 
       if (foundChar[0].alive) {
-        await axios.put(`${apiUrl}/api/guesslist/score/${list.id}`, {
+        await axios.put(`${BACKEND}/api/guesslist/score/${list.id}`, {
           score: -3
         })
       }
@@ -172,7 +172,7 @@ const Movie = (props) => {
     e.preventDefault()
     // creating the GUESS LIST
     const res = await axios.post(
-      `${apiUrl}/api/guesslist/${movieId}`,
+      `${BACKEND}/api/guesslist/${movieId}`,
       guessListName
     )
 
@@ -195,14 +195,14 @@ const Movie = (props) => {
   }
 
   const getAllGuessLists = async () => {
-    const res = await axios.get(`${apiUrl}/api/guesslist/${movieId}`)
+    const res = await axios.get(`${BACKEND}/api/guesslist/${movieId}`)
     setAllGuessLists(res.data)
     sortLeaders(res.data)
   }
 
   const createCharacters = async (guesslistId, character) => {
     let charRes = await axios.post(
-      `${apiUrl}/api/character/${guesslistId}`,
+      `${BACKEND}/api/character/${guesslistId}`,
       character
     )
   }
@@ -213,8 +213,6 @@ const Movie = (props) => {
     let newScore = 0
 
     cast.forEach((char, index) => {
-      // console.log(char.name, 'char.name', index)
-      // console.log(guessList[index].name, 'guessList[index].name', index)
       if (char.name === guessList[index].name) {
         newScore += 3
       } else if (
@@ -230,7 +228,7 @@ const Movie = (props) => {
     })
 
     const res = await axios.put(
-      `${apiUrl}/api/guesslist/score/${guessListId}`,
+      `${BACKEND}/api/guesslist/score/${guessListId}`,
       {
         score: newScore
       }
@@ -244,7 +242,7 @@ const Movie = (props) => {
   }
 
   const deleteMovie = async () => {
-    let res = await axios.delete(`${apiUrl}/api/movie/${movieId}`)
+    let res = await axios.delete(`${BACKEND}/api/movie/${movieId}`)
     navigate('/home')
   }
 
