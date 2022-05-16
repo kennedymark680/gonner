@@ -1,70 +1,72 @@
-# Getting Started with Create React App
+# Gonner
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Date: 5/15/22
 
-## Available Scripts
+## By: Mark Kennedy
 
-In the project directory, you can run:
+[Trello](https://trello.com/b/1mOoTVzi/gonner)
 
-### `npm start`
+[Backend Repo](https://github.com/kennedymark680/gonner_backend)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### **_Socials_**
 
-### `npm test`
+Mark Kennedy:[Github](https://github.com/kennedymark680) | [LinkedIn](https://www.linkedin.com/in/kennedymark680/)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+Website :
+[Gonner](https://space-pilgrims-frontend.herokuapp.com/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### **_Description_**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Welcome to Gonner, the interactive game you can play with your friends while watching your favorite scary movie. List the cast, guess who's a gonner and in what order to earn points.
 
-### `npm run eject`
+![HomePage](https://i.ibb.co/19tHPf5/Screen-Shot-2022-05-15-at-3-00-10-PM.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### **_Technologies Used_**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+This website is created using:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. Postgresql
+2. Express
+3. React
+4. Node.
+5. Flexbox / Grid
+6. Third Party API's
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### **_Getting Started_**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Select a movie to watch. Start the movie and pause once introduced to what you feel is the majority of the cast. Then create a list of all the cast members.
 
-### Code Splitting
+For every player, create a list. Each player will guess when or if the cast are gonners.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Play the movie! Mark the cast as they die.
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### **_Photo_**
 
-### Making a Progressive Web App
+![Game play](https://i.ibb.co/nDzwG0s/Screen-Shot-2022-05-15-at-3-02-59-PM.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+### **_Future Updates_**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- [ ] Chat box - chat with friends during the movie.
+- [ ] Random Event - predict random events.
+- [ ] Rating - rate the movie for game play.
+- [ ] Youtube API - play trailers
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### **_Credits_**
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[TMDB API](https://api.themoviedb.org/3)

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { CheckSession } from './services/Auth'
+import { BACKEND } from './globals'
 import axios from 'axios'
 import Movie from './pages/Movie'
 import Home from './pages/Home'
@@ -62,9 +63,7 @@ function App() {
 
   const handleMovieSubmit = async (e) => {
     // e.preventDefault()
-    console.log(movieForm, 'movieForm')
-    const res = await axios.post(`${apiUrl}/api/movie/create`, movieForm)
-    console.log(res.data, 'res.data')
+    const res = await axios.post(`${BACKEND}/api/movie/create`, movieForm)
     navigate(`/movie/${res.data.id}`)
     getAllMovies()
   }
@@ -72,17 +71,17 @@ function App() {
   // -------- GET REQUESTS ----------
 
   const getMovieDetails = async (movieId) => {
-    const res = await axios.get(`${apiUrl}/api/movie/${movieId}`)
+    const res = await axios.get(`${BACKEND}/api/movie/${movieId}`)
     setMovieDetails(res.data)
   }
 
   const getAllMovies = async () => {
-    const res = await axios.get(`${apiUrl}/api/movie`)
+    const res = await axios.get(`${BACKEND}/api/movie`)
     setAllMovies(res.data)
   }
 
   const getCastByMovieId = async (movieId) => {
-    axios.get(`${apiUrl}/api/castmember/${movieId}`).then((res) => {
+    axios.get(`${BACKEND}/api/castmember/${movieId}`).then((res) => {
       setMovieCast(res.data)
     })
   }
@@ -90,13 +89,13 @@ function App() {
   // ---------- DELETES ------------
 
   const deleteCastMember = async (castmemberId, movieId) => {
-    const res = await axios.delete(`${apiUrl}/api/castmember/${castmemberId}`)
+    const res = await axios.delete(`${BACKEND}/api/castmember/${castmemberId}`)
     getCastByMovieId(movieId)
     getMovieDetails(movieId)
 
     if (movieDetails.gonnerOrder > 1) {
       let newOrder = movieDetails.gonnerOrder - 1
-      const resMovie = await axios.put(`${apiUrl}/api/movie/${movieId}`, {
+      const resMovie = await axios.put(`${BACKEND}/api/movie/${movieId}`, {
         gonnerOrder: newOrder
       })
       getMovieDetails(movieId)
@@ -146,8 +145,6 @@ function App() {
               castForm={castForm}
               setCastForm={setCastForm}
               setMovieForm={setMovieForm}
-              // gonnerOrder={gonnerOrder}
-              // increaseGonnerCount={increaseGonnerCount}
             />
           }
         />

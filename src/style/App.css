@@ -327,11 +327,28 @@ footer {
   padding: 0 0 40px 0;
 }
 
-.cast,
-.character,
+/* .cast, */
+/* .character, */
 .leader {
   display: flex;
   justify-content: space-around;
+
+  margin: 10px 0 0 0;
+
+  width: 25vw;
+  min-width: 250px;
+  max-width: 270px;
+
+  background-color: white;
+  border-radius: 5px;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+}
+
+.cast,
+.character {
+  display: grid;
+  grid-template-columns: 1fr 3fr 2fr;
+  justify-items: center;
 
   margin: 10px 0 0 0;
 
@@ -568,10 +585,6 @@ input:hover  {
   }
 }
 
-.character {
-  display: flex;
-  flex-direction: row;
-}
 
 .remove-list {
   border: none;

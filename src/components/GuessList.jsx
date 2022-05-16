@@ -1,59 +1,41 @@
 import Character from "./Character"
 import axios from 'axios'
 import { useState, useEffect }  from 'react'
+import { BACKEND } from '../globals'
 
 const GuessList = (props) => {
-  const apiUrl = 'https://gonner-backend.herokuapp.com'
-
-  // might not need this anymore 
-  const [character, setCharacter] = useState('')
 
   const [characters, setCharacters] = useState([])
 
 
-
-  const handleCharacterChange = (e) => {
-    setCharacter(e.target.value)
-    console.log(character)
-  }
-
-  const handleCharacterCreate = async () => {
-    const res = await axios.post(`${apiUrl}/api/character/`)
-    console.log(character)
-    setCharacter('')
-  }
-
   const handleGonner = async (charId) => {
-    const resCharacter = await axios.put(`${apiUrl}/api/character/${charId}`, { order: props.gonnerOrder, alive: false})
+    await axios.put(`${BACKEND}/api/character/${charId}`, { order: props.gonnerOrder, alive: false})
     
     let newGonnerOrder = props.gonnerOrder + 1
-    const resGuessList = await axios.put(`${apiUrl}/api/guesslist/${props.id}`, { gonnerOrder: newGonnerOrder})
+    await axios.put(`${BACKEND}/api/guesslist/${props.id}`, { gonnerOrder: newGonnerOrder})
     getCharactersByListId()
   }
 
   const handleGonnerReverse = async (char) => {
     let newGonnerOrder = props.gonnerOrder - 1
-    const resGuessList = await axios.put(`${apiUrl}/api/guesslist/${props.id}`, { gonnerOrder: newGonnerOrder})
-
-    let newCharOrder = char.order - 1
-    const resCharacter = await axios.put(`${apiUrl}/api/character/${char.id}`, { order: null, alive: true})
+    await axios.put(`${BACKEND}/api/guesslist/${props.id}`, { gonnerOrder: newGonnerOrder})
+    await axios.put(`${BACKEND}/api/character/${char.id}`, { order: null, alive: true})
     getCharactersByListId()
   }
 
   const getCharactersByListId = async () => {
-    const characters = await axios.get(`${apiUrl}/api/character/${props.id}`)
+    const characters = await axios.get(`${BACKEND}/api/character/${props.id}`)
     props.getAllGuessLists()
     setCharacters(characters.data)
   }
 
   const deleteList = async () => {
-    const list = await axios.delete(`${apiUrl}/api/guesslist/delete/${props.id}`)
+    await axios.delete(`${BACKEND}/api/guesslist/delete/${props.id}`)
     props.getAllGuessLists()
   }
  
   useEffect(() => {
     getCharactersByListId()
-
     const interval = setInterval(() => {
       getCharactersByListId()
     }, 1000)
@@ -66,7 +48,7 @@ const GuessList = (props) => {
         <h3>Score: {props.score}</h3>
         {characters.map((char) => (
           <div>
-            <Character key={char.name} name={char.name} id={char.id} order={char.order} char={char} handleGonner={handleGonner} handleGonnerReverse={handleGonnerReverse}/>
+            <Character key={char.id} name={char.name} id={char.id} order={char.order} char={char} handleGonner={handleGonner} handleGonnerReverse={handleGonnerReverse}/>
           </div>
         ))}
         <button className='remove-list' onClick={() => deleteList()}>Remove List</button>
