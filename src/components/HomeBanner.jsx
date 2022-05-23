@@ -1,4 +1,3 @@
-import GonnerLogoTran from '../resources/gonnerTran.png'
 import GonnerInverted from '../resources/gonnerInv.png'
 
 const HomeBanner = (props) => {

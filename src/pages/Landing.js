@@ -12,9 +12,11 @@ const Landing = ({ setUser, toggleAuthenticated }) => {
   const [register, setRegister] = useState(false)
 
   const toggleLogin = () => {
+    setRegister(false)
     setLogin(!login)
   }
   const toggleRegister = () => {
+    setLogin(false)
     setRegister(!register)
   }
 
@@ -26,10 +28,10 @@ const Landing = ({ setUser, toggleAuthenticated }) => {
         your predictions, earn points and compete!
       </h4>
       <div>
-        <button onClick={() => toggleLogin()} className="white-red-button">
+        <button onClick={toggleLogin} className="white-red-button">
           Login
         </button>
-        <button onClick={() => toggleRegister()} className="white-red-button">
+        <button onClick={toggleRegister} className="white-red-button">
           Register
         </button>
         <button onClick={() => navigate('/home')} className="white-red-button">

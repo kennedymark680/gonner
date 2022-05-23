@@ -38,11 +38,11 @@ function App() {
   // ------- AUTH FUNCTIONS --------
 
   const handleLogout = () => {
-    setUser(null) //Once logged out, the user no longer has pilgrim priviledges
-    toggleAuthenticated(false) // Once logged out, the user is no longer authenticated
+    setUser(null)
+    toggleAuthenticated(false)
     localStorage.clear()
   }
-  // Check each time if the user is a pilgrim and authenticated to make certain commands
+
   const checkToken = async () => {
     const user = await CheckSession()
     setUser(user)

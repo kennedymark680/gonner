@@ -7,21 +7,9 @@ import LearnToPlay from '../components/LearnToPlay'
 import SearchMovie from '../components/SearchMovie'
 
 const Home = (props) => {
-  const [addMovie, toggleAddMovie] = useState(false)
-  const [learnToPlay, toggleLearnToPlay] = useState(false)
-  const [search, toggleSearch] = useState(false)
-
-  const clickLearn = () => {
-    toggleLearnToPlay(!learnToPlay)
-  }
-
-  const clickAddMovie = () => {
-    toggleAddMovie(!addMovie)
-  }
-
-  const clickSearch = () => {
-    toggleSearch(!search)
-  }
+  const [hasMovie, setHasMovie] = useState(false)
+  const [isInstructionsDisplayed, setIsInstructionsDisplayed] = useState(false)
+  const [hasSearched, setHasSearched] = useState(false)
 
   useEffect(() => {
     props.getAllMovies()
@@ -29,22 +17,27 @@ const Home = (props) => {
 
   return (
     <div className="homePage">
-      <HomeBanner clickLearn={clickLearn} />
-      <AddMovie clickAddMovie={clickAddMovie} clickSearch={clickSearch} />
-      {search ? (
+      <HomeBanner
+        clickLearn={() => setIsInstructionsDisplayed(!isInstructionsDisplayed)}
+      />
+      <AddMovie
+        clickAddMovie={() => setHasMovie(!hasMovie)}
+        clickSearch={() => setHasSearched(!hasSearched)}
+      />
+      {hasSearched ? (
         <SearchMovie
           setMovieForm={props.setMovieForm}
           handleMovieSubmit={props.handleMovieSubmit}
         />
       ) : null}
-      {learnToPlay ? <LearnToPlay /> : null}
-      {addMovie ? (
+      {isInstructionsDisplayed ? <LearnToPlay /> : null}
+      {hasMovie ? (
         <AddMovieForm
           handleMovieSubmit={props.handleMovieSubmit}
           handleMovieChange={props.handleMovieChange}
         />
       ) : null}
-      {!learnToPlay && !search ? (
+      {!isInstructionsDisplayed && !hasSearched ? (
         <div className="movie-list">
           {props.allMovies.map((movie) => (
             <MovieCard
