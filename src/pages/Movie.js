@@ -40,6 +40,9 @@ const Movie = (props) => {
     props.getCastByMovieId(movieId)
   }
 
+  //=========================== GAME PLAY LOGIC ==============================
+
+  // ------------------- SCORING ---------------------------
   const updateScore = async (selectedCast, allGuessLists) => {
     // Checking every list
     for (const list of allGuessLists) {
@@ -96,6 +99,8 @@ const Movie = (props) => {
     getAllGuessLists()
   }
 
+  // ------------------------------ CAST DIES -----------------------------------
+
   const handleDeath = async (castmemberId) => {
     // Making sure deaths can't exceed the cast number
     if (props.movieDetails.gonnerOrder <= props.movieCast.length) {
@@ -144,7 +149,10 @@ const Movie = (props) => {
     props.getCastByMovieId(movieId)
   }
 
+  // ------------------------------ CAST LIVES -----------------------------------
+
   const handleLived = async (castMember) => {
+    // Check all the lists and if the name and order match give 3 points
     for (const list of allGuessLists) {
       const foundChar = list.Characters.filter(
         (char) => castMember.name === char.name
@@ -160,6 +168,7 @@ const Movie = (props) => {
   }
 
   const handleLivedReverse = async (castMember) => {
+    // Reverse the points given by handleLived
     for (const list of allGuessLists) {
       const foundChar = list.Characters.filter(
         (char) => castMember.name === char.name
@@ -174,9 +183,15 @@ const Movie = (props) => {
     getAllGuessLists()
   }
 
-  // ----- GUESS LIST -----
+  // ------------------------------ GUESS LIST CREATION ----------------------------------------
+
   const handleGuessListChange = (e) => {
     setGuessListName({ ...guessListName, [e.target.name]: e.target.value })
+  }
+
+  // Create a character for the list
+  const createCharacters = async (guesslistId, character) => {
+    await axios.post(`${BACKEND}/api/character/${guesslistId}`, character)
   }
 
   const handleGuessListSubmit = async (e) => {
@@ -197,6 +212,7 @@ const Movie = (props) => {
       createCharacters(res.data.id, character)
     }
 
+    // Reset the values for the list creation
     setGuessListName({
       name: '',
       score: 0,
@@ -209,13 +225,6 @@ const Movie = (props) => {
     const res = await axios.get(`${BACKEND}/api/guesslist/${movieId}`)
     setAllGuessLists(res.data)
     sortLeaders(res.data)
-  }
-
-  const createCharacters = async (guesslistId, character) => {
-    let charRes = await axios.post(
-      `${BACKEND}/api/character/${guesslistId}`,
-      character
-    )
   }
 
   // ------- CHECKING SCORE ---------
