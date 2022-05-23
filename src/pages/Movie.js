@@ -97,7 +97,7 @@ const Movie = (props) => {
   }
 
   const handleDeath = async (castmemberId) => {
-    // Check if gonnerOrder isn't more than the number of cast members
+    // Making sure deaths can't exceed the cast number
     if (props.movieDetails.gonnerOrder <= props.movieCast.length) {
       // Set Cast Members gonner order
       const resCastMember = await axios.put(
@@ -107,13 +107,14 @@ const Movie = (props) => {
           order: props.movieDetails.gonnerOrder
         }
       )
-      let selectedCast = resCastMember.data[0]
 
+      // Sending the deceased cast member to the updateScore function
+      let selectedCast = resCastMember.data[0]
       updateScore(selectedCast, allGuessLists)
 
       // Increase gonner order
       const newOrder = props.movieDetails.gonnerOrder + 1
-      const resMovie = await axios.put(`${BACKEND}/api/movie/${movieId}`, {
+      await axios.put(`${BACKEND}/api/movie/${movieId}`, {
         gonnerOrder: newOrder
       })
       props.getCastByMovieId(movieId)
