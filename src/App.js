@@ -23,11 +23,7 @@ function App() {
   const [allMovies, setAllMovies] = useState([])
   const [movieDetails, setMovieDetails] = useState({})
   const [movieCast, setMovieCast] = useState([])
-  const [castForm, setCastForm] = useState({
-    name: '',
-    alive: true,
-    order: 0
-  })
+
   const [movieForm, setMovieForm] = useState({
     name: '',
     description: '',
@@ -53,10 +49,6 @@ function App() {
 
   const handleMovieChange = (e) => {
     setMovieForm({ ...movieForm, [e.target.name]: e.target.value })
-  }
-
-  const handleCastChange = (e) => {
-    setCastForm({ ...castForm, [e.target.name]: e.target.value })
   }
 
   // ------- HANDLE SUBMITs ---------
@@ -138,12 +130,11 @@ function App() {
               user={user}
               getMovieDetails={getMovieDetails}
               movieDetails={movieDetails}
-              handleCastChange={handleCastChange}
               getCastByMovieId={getCastByMovieId}
               deleteCastMember={deleteCastMember}
               movieCast={movieCast}
-              castForm={castForm}
-              setCastForm={setCastForm}
+              // castForm={castForm}
+              // setCastForm={setCastForm}
               setMovieForm={setMovieForm}
             />
           }

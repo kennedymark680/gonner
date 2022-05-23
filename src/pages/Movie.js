@@ -24,15 +24,17 @@ const Movie = (props) => {
     score: 0,
     gonnerOrder: 1
   })
+  const [castForm, setCastForm] = useState({
+    name: '',
+    alive: true,
+    order: null
+  })
 
   // ----------- AXIOS CALLS -------------
 
   const handleCastSubmit = async () => {
-    const res = await axios.post(
-      `${BACKEND}/api/castmember/${movieId}`,
-      props.castForm
-    )
-    props.setCastForm({
+    await axios.post(`${BACKEND}/api/castmember/${movieId}`, castForm)
+    setCastForm({
       name: '',
       alive: true,
       order: null
@@ -40,9 +42,13 @@ const Movie = (props) => {
     props.getCastByMovieId(movieId)
   }
 
+  const handleCastChange = (e) => {
+    setCastForm({ ...castForm, [e.target.name]: e.target.value })
+  }
+
   //=========================== GAME PLAY LOGIC ==============================
 
-  // ------------------- SCORING ---------------------------
+  // --------------------------- SCORING -----------------------------------
   const updateScore = async (selectedCast, allGuessLists) => {
     // Checking every list
     for (const list of allGuessLists) {
@@ -227,42 +233,16 @@ const Movie = (props) => {
     sortLeaders(res.data)
   }
 
-  // ------- CHECKING SCORE ---------
-  const checkScore = async (cast, guessList, guessListId) => {
-    // Set the score to zero first
-    let newScore = 0
-
-    cast.forEach((char, index) => {
-      if (char.name === guessList[index].name) {
-        newScore += 3
-      } else if (
-        index < cast.length &&
-        char.name === guessList[index + 1].name
-      ) {
-        newScore += 1
-      } else if (index > 0 && char.name === guessList[index - 1].name) {
-        newScore += 1
-      } else {
-        newScore += 0
-      }
-    })
-
-    const res = await axios.put(
-      `${BACKEND}/api/guesslist/score/${guessListId}`,
-      {
-        score: newScore
-      }
-    )
-    // getAllGuessLists()
-  }
+  // ---------------------------- SORT LEADERS -------------------------------------
 
   const sortLeaders = (scrambled) => {
     let sortedLeaders = scrambled.sort((a, b) => b.score - a.score)
     setSortedLeaders(sortedLeaders)
   }
 
+  // ---------------------------- DELETE MOVIE -------------------------------------
   const deleteMovie = async () => {
-    let res = await axios.delete(`${BACKEND}/api/movie/${movieId}`)
+    await axios.delete(`${BACKEND}/api/movie/${movieId}`)
     navigate('/home')
   }
 
@@ -310,8 +290,8 @@ const Movie = (props) => {
                     name="name"
                     type="text"
                     placeholder="Cast Member"
-                    value={props.castForm.name}
-                    onChange={props.handleCastChange}
+                    value={castForm.name}
+                    onChange={handleCastChange}
                   />
                   <button
                     className="add-list"
@@ -341,7 +321,6 @@ const Movie = (props) => {
                 name={list.name}
                 score={list.score}
                 getAllGuessLists={getAllGuessLists}
-                checkScore={checkScore}
               />
             ))}
           </div>
