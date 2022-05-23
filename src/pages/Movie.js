@@ -69,23 +69,29 @@ const Movie = (props) => {
   }
 
   const updateScoreReverse = async (selectedCast, allGuessLists) => {
+    // Checking every list
     for (const list of allGuessLists) {
+      // Finding the character in the list and checking its order.
       const foundChar = list.Characters.filter(
         (char) => selectedCast.name === char.name
       )
+
+      // Finding the difference between the guess and the actual order.
       const difference = Math.abs(selectedCast.order - foundChar[0].order)
+
       let score = 0
+
+      // Reversing the given points
       if (difference === 0 && !foundChar[0].alive) {
         score = -3
       } else if (difference === 1 && !foundChar[0].alive) {
         score = -1
       }
-      const newGuessList = await axios.put(
-        `${BACKEND}/api/guesslist/score/${list.id}`,
-        {
-          score: score
-        }
-      )
+
+      // Updating the score for each list
+      await axios.put(`${BACKEND}/api/guesslist/score/${list.id}`, {
+        score: score
+      })
     }
     getAllGuessLists()
   }
