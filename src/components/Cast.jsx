@@ -5,13 +5,7 @@ const Cast = ({char, handleDeath, deleteCastMember, movieId, handleLived, allGue
   const [clickedGonner, toggleClickedGonner] = useState(false)
   const [clickedSurvivor, toggleClickedSurvivor] = useState(false)
 
-  const gonnerClicked = () => {
-    toggleClickedGonner(!clickedGonner)
-  }
 
-  const survivorClicked = () => {
-    toggleClickedSurvivor(!clickedSurvivor)
-  }
 
   const allowHandleDeath = () => {
     if (!clickedGonner) {
@@ -35,8 +29,8 @@ const Cast = ({char, handleDeath, deleteCastMember, movieId, handleLived, allGue
       <h4>{char.name}</h4>
       <div className="cast-button-container">
         <div className="cast-buttons">
-          <button onClick={!clickedSurvivor ? () => (allowHandleDeath(), gonnerClicked()) : null} className={ clickedGonner ? 'gonner-button' : null}>Died</button>
-          <button onClick={!clickedGonner ? () => (allowHandleLive(), survivorClicked()) : null} className={ clickedSurvivor ? 'survivor-button' : null}>Lived</button>
+          <button onClick={!clickedSurvivor ? () => (allowHandleDeath(), toggleClickedGonner(!clickedGonner)) : null} className={ clickedGonner ? 'gonner-button' : null}>Died</button>
+          <button onClick={!clickedGonner ? () => (allowHandleLive(), toggleClickedSurvivor(!clickedSurvivor)) : null} className={ clickedSurvivor ? 'survivor-button' : null}>Lived</button>
         </div>
           <button id='delete' onClick={() => deleteCastMember(char.id, movieId)}>x</button>
         </div>

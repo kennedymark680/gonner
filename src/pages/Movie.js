@@ -122,19 +122,16 @@ const Movie = (props) => {
   }
 
   const handleDeathReverse = async (cast) => {
+    // Take points away from the lists
     updateScoreReverse(cast, allGuessLists)
+
+    // Change the gonnerOrder of the movie
     const newOrder = props.movieDetails.gonnerOrder - 1
-    const resMovie = await axios.put(`${BACKEND}/api/movie/${movieId}`, {
+    await axios.put(`${BACKEND}/api/movie/${movieId}`, {
       gonnerOrder: newOrder
     })
 
-    let newCastOrder = null
-    if (newCastOrder === 1) {
-      newCastOrder = null
-    } else {
-      newCastOrder = cast.order - 1
-    }
-
+    // Reverting the cast members status
     const resCastMember = await axios.put(
       `${BACKEND}/api/castmember/${cast.id}`,
       {
@@ -142,7 +139,8 @@ const Movie = (props) => {
         order: null
       }
     )
-    let selectedCast = resCastMember.data[0]
+
+    // Call to reload the cast list
     props.getCastByMovieId(movieId)
   }
 
