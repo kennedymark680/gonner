@@ -17,6 +17,7 @@ const Movie = (props) => {
 
   // ----------- STATE -----------------
 
+  const [isDeathLoading, setIsDeathLoading] = useState(false)
   const [sortedLeaders, setSortedLeaders] = useState([])
   const [allGuessLists, setAllGuessLists] = useState([])
   const [guessListName, setGuessListName] = useState({
@@ -110,6 +111,8 @@ const Movie = (props) => {
   const handleDeath = async (castmemberId) => {
     // Making sure deaths can't exceed the cast number
     if (props.movieDetails.gonnerOrder <= props.movieCast.length) {
+      setIsDeathLoading(true)
+
       // Set Cast Members gonner order
       const resCastMember = await axios.put(
         `${BACKEND}/api/castmember/${castmemberId}`,
@@ -128,6 +131,7 @@ const Movie = (props) => {
       await axios.put(`${BACKEND}/api/movie/${movieId}`, {
         gonnerOrder: newOrder
       })
+      setIsDeathLoading(false)
       props.getCastByMovieId(movieId)
     }
   }
@@ -283,6 +287,7 @@ const Movie = (props) => {
                     allGuessLists={allGuessLists}
                     handleDeathReverse={handleDeathReverse}
                     handleLivedReverse={handleLivedReverse}
+                    isDeathLoading={isDeathLoading}
                   />
                 ))}
                 <div>

@@ -47,8 +47,8 @@ const GuessList = (props) => {
         <h2>{props.name}</h2>
         <h3>Score: {props.score}</h3>
         {characters.map((char) => (
-          <div>
-            <Character key={char.id} name={char.name} id={char.id} order={char.order} char={char} handleGonner={handleGonner} handleGonnerReverse={handleGonnerReverse}/>
+          <div key={char.id}>
+            <Character name={char.name} id={char.id} order={char.order} char={char} handleGonner={handleGonner} handleGonnerReverse={handleGonnerReverse}/>
           </div>
         ))}
         <button className='remove-list' onClick={() => deleteList()}>Remove List</button>
